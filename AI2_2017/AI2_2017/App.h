@@ -1,20 +1,15 @@
-/************************************************************************/
-/**
- * 
- */                                                                      
-/************************************************************************/
-
 #pragma once
 #include "State.h"
-#include <stack>
+#include "Screen.h"
 class App
 {
 public:
-
-  App() = default;
+  Screen m_screen;
+  App();
   ~App() {};
-  void Update();
-  void SetState(State* state);
+  void onUpdate();
+  void setState(State* state);
+  std::stack<State*> m_stateStack;
   State* m_currentState;
   
 };

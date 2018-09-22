@@ -1,9 +1,4 @@
-﻿  stdafx.cpp
-  AI2_2017.cpp
-  State.cpp
-  Generando código
-  0 of 1 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+﻿  Generando código
+  All 7 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Generación de código finalizada
-  AI2_2017.vcxproj -> C:\Users\PROPIETARIO\Documents\Visual Studio 2017\Projects\AI2_2017\Release\AI2_2017.exe
+  AI2_2017.vcxproj -> C:\Users\PROPIETARIO\Documents\7mo Cuatri\AI2\AI2_2017\x86/Release/AI2_2017.exe
