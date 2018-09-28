@@ -11,6 +11,7 @@
 
 #include "Utilities.h"
 
+//forward declaration
 class State;
 
 /**
@@ -22,25 +23,64 @@ class State;
 class Screen
 {
  public:
+
+  /**
+   * Default Constructor
+   */
   Screen() = default;
+
+  /**
+   * Default Destructor
+   */
   ~Screen();
   
-  sf::RenderWindow 
-  m_mainWindow;
-  
-  std::vector<sf::Drawable*> 
-  m_objects;
-  
+  /**
+   * @brief Renders objects by state
+   * @param 
+   * @return 
+   * 
+   */
   void 
   onRender();
   
+  /**
+   * @brief initiates the window object
+   * @param 
+   * @return 
+   * 
+   */
   bool 
   createWindow();
   
+  /**
+   * @brief Checks the actual state of the FSM
+   * @param the pointer to the actual state
+   * @return 
+   * 
+   */
   void 
   CheckState(State* s);
   
+  /**
+   * Member declaration
+   */
+
+ public:
+
+  /**
+   * Simple sfml rectangle to test the flow
+   */
   sf::RectangleShape 
   m_shape;
+  
+  /**
+   * SFML window to render stuff
+   */
+  sf::RenderWindow m_mainWindow;
+  
+  /**
+   * Vector of all drawable objects
+   */
+  std::vector<sf::Drawable*> m_objects;
 };
 

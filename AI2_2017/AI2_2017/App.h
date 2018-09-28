@@ -3,7 +3,7 @@
  * @file App.h
  * @author Marco "Swampy" Millan
  * @date 2018/09/27 2018
- * @brief 
+ * @brief the App FSM which we use to activate the app and run around it
  * 
  */
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
@@ -14,7 +14,7 @@
 
 /**
 * Description:
-*   App state machine thatis in charge of running the game app etc
+*   App state machine that is in charge of running the game app etc
 * Sample usage:
 * 	App.onUpdate() checks for inputs or changes in states
 */
@@ -81,15 +81,55 @@ class App
   /**
    * all states possibles for this FSM
    */
+
+  /**
+   * pointer member to Logo State
+   */
   Logo_State*      m_logoS;
+
+  /**
+   * pointer member to Play State
+   */
   Play_State*      m_playS;
+
+  /**
+   * pointer member to Help State
+   */
   Help_State*      m_helpS;
+
+  /**
+   * pointer member to Menu State
+   */
   Menu_State*      m_menuS;
+
+  /**
+   * pointer member to Sound State
+   */
   Sound_State*     m_sounS;
+
+  /**
+   * pointer member to Pause State
+   */
   Pause_State*     m_pausS;
+
+  /**
+   * pointer member to Options State
+   */
   Options_State*   m_optnS;
+
+  /**
+   * pointer member to Graphics State
+   */
   Graphics_State*  m_grapS;
+
+  /**
+   * pointer member to GamePlay State
+   */
   GamePlay_State*  m_gameS;
+
+  /**
+   * pointer member to GameOver State
+   */
   GameOver_State*  m_overS;
 
 };

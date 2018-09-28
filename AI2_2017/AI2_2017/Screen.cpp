@@ -1,3 +1,13 @@
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * @file Screen.cpp
+ * @author Marco "Swampy" Millan
+ * @date 2018/09/28 2018
+ * @brief the pp file of the Screen class | Method definition
+ * 
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+
 #include "stdafx.h"
 #include "Screen.h"
 #include "State.h"
@@ -17,7 +27,7 @@ Screen::createWindow() {
   //(sf::VideoMode(800, 400), "AI 2018 C");
   //m_mainWindow = {sf::VideoMode(800, 400), "AI 2018 C"};
   m_mainWindow.create(sf::VideoMode(800, 400), "AI 2018 C");
-  m_shape.setPosition(sf::Vector2f(100.0f,100.0f));
+  m_shape.setPosition(sf::Vector2f(0.0f,0.0f));
   m_shape.setSize(sf::Vector2f(800.0f,400.0f));
   return true;
 }

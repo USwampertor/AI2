@@ -1,3 +1,13 @@
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * @file App.cpp
+ * @author Marco "Swampy" Millan
+ * @date 2018/09/28 2018
+ * @brief the cpp for the App FSM class | Method definition
+ * 
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+
 #include "stdafx.h"
 #include "App.h"
 

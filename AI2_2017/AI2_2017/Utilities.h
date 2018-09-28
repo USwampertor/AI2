@@ -3,13 +3,15 @@
  * @file Utilities.h
  * @author Marco "Swampy" Millan
  * @date 2018/09/28 2018
- * @brief basic things that almost all lvaaries utilixar
+ * @brief basic things that almost all headers use
  * 
  */
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
-#pragma once
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
-#include <stack>
 
+#pragma once
+
+#include <iostream>
+#include <stack>
+#include <vector>
+
+#include <SFML/Graphics.hpp>
