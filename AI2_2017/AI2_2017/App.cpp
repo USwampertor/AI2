@@ -1,5 +1,5 @@
-#include "App.h"
 #include "stdafx.h"
+#include "App.h"
 
 void
 App::onEntry() {
@@ -82,5 +82,5 @@ App::setState(State* state) {
 
 void
 App::onExit() {
-
+  m_screen.m_mainWindow.close();
 }

@@ -93,6 +93,7 @@ bool Menu_State::handleInput(sf::Event event) {
   else if (event.key.code == sf::Keyboard::Escape) {
     // m_fsm->setState(m_fsm->m_playS);
     m_fsm->setState(nullptr);
+    m_fsm->onExit();
   }
   return true;
 }
@@ -101,7 +102,6 @@ void Menu_State::onEntry() {
   m_ID = 3;
 }
 void Menu_State::onExit() {
-  //delete m_fsm;
 }
 
 bool GameOver_State::handleInput(sf::Event event) {

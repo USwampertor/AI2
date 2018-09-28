@@ -3,7 +3,7 @@
  * @file State.h
  * @author Marco "Swampy" Millan
  * @date 2018/09/27 2018
- * @brief
+ * @brief the state class which all states are sons of
  * 
  */
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
