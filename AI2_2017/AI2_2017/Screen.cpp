@@ -7,11 +7,13 @@ Screen::~Screen() {
   
 }
 
-void Screen::onRender() {
+void 
+Screen::onRender() {
   m_mainWindow.draw(m_shape);
 }
 
-bool Screen::createWindow() {
+bool 
+Screen::createWindow() {
   //(sf::VideoMode(800, 400), "AI 2018 C");
   //m_mainWindow = {sf::VideoMode(800, 400), "AI 2018 C"};
   m_mainWindow.create(sf::VideoMode(800, 400), "AI 2018 C");
@@ -19,7 +21,8 @@ bool Screen::createWindow() {
   m_shape.setSize(sf::Vector2f(800.0f,400.0f));
   return true;
 }
-void Screen::CheckState(State* s)
+void 
+Screen::CheckState(State* s)
 {
   if      (s->m_ID == 0) { m_shape.setFillColor(sf::Color::Blue   ); }
   else if (s->m_ID == 1) { m_shape.setFillColor(sf::Color::Green  ); }

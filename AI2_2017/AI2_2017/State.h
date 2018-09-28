@@ -1,10 +1,19 @@
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * @file State.h
+ * @author Marco "Swampy" Millan
+ * @date 2018/09/27 2018
+ * @brief
+ * 
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 #pragma once
 #include "Utilities.h"
-//#include "App.h"
-
 
 class App;
-class State {
+
+class State 
+{
  public:
   State() {m_fsm = nullptr; };
   virtual ~State() {};
@@ -22,14 +31,16 @@ class State {
   
 };
 
-class Pause_State : public State {
+class Pause_State : public State 
+{
  public:
    bool handleInput(sf::Event event);
    bool onUpdate(sf::Event event);
    void onEntry();
    void onExit();
 };
-class Logo_State : public State {
+class Logo_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -40,7 +51,8 @@ class Logo_State : public State {
   int counter;
 };
 
-class Help_State : public State {
+class Help_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -49,7 +61,8 @@ class Help_State : public State {
   
 };
 
-class Menu_State : public State {
+class Menu_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -58,7 +71,8 @@ class Menu_State : public State {
   
 };
 
-class GameOver_State : public State {
+class GameOver_State : public State 
+{
  public:
    bool handleInput(sf::Event event);
    bool onUpdate(sf::Event event);
@@ -66,7 +80,8 @@ class GameOver_State : public State {
    void onExit();
   
 };
-class Play_State : public State {
+class Play_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -74,7 +89,8 @@ class Play_State : public State {
   void onExit();
   
 };
-class Options_State : public State {
+class Options_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -82,7 +98,8 @@ class Options_State : public State {
   void onExit();
   
 };
-class GamePlay_State : public State {
+class GamePlay_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -91,7 +108,8 @@ class GamePlay_State : public State {
   
 };
 
-class Graphics_State : public State {
+class Graphics_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);
@@ -100,7 +118,8 @@ class Graphics_State : public State {
   
 };
 
-class Sound_State : public State {
+class Sound_State : public State 
+{
  public:
   bool handleInput(sf::Event event);
   bool onUpdate(sf::Event event);

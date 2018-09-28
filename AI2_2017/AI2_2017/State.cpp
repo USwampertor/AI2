@@ -10,7 +10,7 @@ bool Pause_State::handleInput(sf::Event event) {
     return false;
   }
   if (event.key.code == sf::Keyboard::O) {
-    m_fsm->setState(new Options_State());
+    m_fsm->setState(m_fsm->m_optnS);
   }
   return true;
 }
@@ -34,9 +34,9 @@ bool Logo_State::onUpdate(sf::Event event) {
   ++counter;
   if (counter <= 5) { return true; }
   else {
-    m_fsm->setState(new Menu_State());
-    return false;
+    m_fsm->setState(m_fsm->m_menuS);
   }
+  return true;
 }
 
 bool Logo_State::handleInput(sf::Event event) {
@@ -84,10 +84,15 @@ bool Menu_State::onUpdate(sf::Event event) {
 }
 bool Menu_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::O) {
-    m_fsm->setState(new Options_State());
+    m_fsm->setState(m_fsm->m_optnS);
   }
   else if (event.key.code == sf::Keyboard::Space) {
-    m_fsm->setState(new Play_State());
+   // m_fsm->setState(m_fsm->m_playS);
+    m_fsm->setState(m_fsm->m_playS = new Play_State());
+  }
+  else if (event.key.code == sf::Keyboard::Escape) {
+    // m_fsm->setState(m_fsm->m_playS);
+    m_fsm->setState(nullptr);
   }
   return true;
 }
@@ -101,10 +106,10 @@ void Menu_State::onExit() {
 
 bool GameOver_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Space) {
-    m_fsm->setState(new Play_State());
+    m_fsm->setState(m_fsm->m_playS);
   }
   if (event.key.code == sf::Keyboard::Escape) {
-    m_fsm->setState(new Menu_State());
+    m_fsm->setState(m_fsm->m_menuS);
   }
   return true;
 }
@@ -123,14 +128,11 @@ void GameOver_State::onExit() {
 }
 
 bool Play_State::handleInput(sf::Event event) {
-  if (event.key.code == sf::Keyboard::Q) {
-    m_fsm->setState(new GameOver_State());
-  }
   if (event.key.code == sf::Keyboard::H) {
-    m_fsm->setState(new Help_State());
+    m_fsm->setState(m_fsm->m_helpS);
   }
-  if (event.key.code == sf::Keyboard::P) {
-    m_fsm->setState(new GameOver_State());
+  if (event.key.code == sf::Keyboard::Escape) {
+    m_fsm->setState(m_fsm->m_overS);
   }
   return true;
 }
@@ -150,13 +152,13 @@ void Play_State::onExit() {
 
 bool Options_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::P) {
-    m_fsm->setState(new GamePlay_State());
+    m_fsm->setState(m_fsm->m_gameS);
   }
   if (event.key.code == sf::Keyboard::G) {
-    m_fsm->setState(new Graphics_State());
+    m_fsm->setState(m_fsm->m_grapS);
   }
   if (event.key.code == sf::Keyboard::S) {
-    m_fsm->setState(new Sound_State());
+    m_fsm->setState(m_fsm->m_sounS);
   }
   if (event.key.code == sf::Keyboard::Escape) {
     return false;

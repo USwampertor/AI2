@@ -1,27 +1,44 @@
-#include "stdafx.h"
 #include "App.h"
+#include "stdafx.h"
 
-App::App() {
+void
+App::onEntry() {
+  
+  m_logoS = new Logo_State();
+  m_playS = new Play_State();
+  m_helpS = new Help_State();
+  m_menuS = new Menu_State();
+  m_sounS = new Sound_State();
+  m_pausS = new Pause_State();
+  m_optnS = new Options_State();
+  m_grapS = new Graphics_State();
+  m_gameS = new GamePlay_State();
+  m_overS = new GameOver_State();
+  
   m_currentState = nullptr;
   m_screen.createWindow();
-  m_stateStack.push(new Logo_State());
+  m_stateStack.push(m_logoS);
   m_currentState = m_stateStack.top();
   m_currentState->m_fsm = this;
 }
-void App::onUpdate() {
+
+void 
+App::onUpdate() {
+  sf::Event event;
+  event.type = sf::Event::Count;
   while (m_screen.m_mainWindow.isOpen()) {
-    sf::Event event;
     while (m_screen.m_mainWindow.pollEvent(event))
     {
       if (event.type == sf::Event::Closed) {
       m_screen.m_mainWindow.close();
+      return;
       }
       if (!m_currentState->onUpdate(event)) {
         setState(nullptr);
       }
-      else {
-        m_currentState = m_stateStack.top();
-      }
+      //else {
+      //  m_currentState = m_stateStack.top();
+      //}
         //el estado tiene un puntero a su maquina de estados, con el cual activa el set state
 
     }
@@ -32,15 +49,10 @@ void App::onUpdate() {
     m_screen.m_mainWindow.display();
   }
 }
-/**
- * Set State sets the m_currentState to the new state and gets it in the stack
- *
- *
- * @param state
- *
- *
- */
-void App::setState(State* state) {
+
+
+void 
+App::setState(State* state) {
 /**
  * if(state is null)
     if(stack is with something)
@@ -48,9 +60,8 @@ void App::setState(State* state) {
  */
   if (state == nullptr) {
     if (!m_stateStack.empty()) {
-      //m_stateStack.pop();
-      m_currentState->onExit();
-      delete (m_currentState);
+      m_stateStack.pop();
+      //delete (m_currentState);
       m_currentState = m_stateStack.top();
       m_currentState->onEntry();
     }
@@ -62,7 +73,14 @@ void App::setState(State* state) {
     //m_stateStack.pop();
     state->m_fsm = this;
     m_stateStack.push(state);
-   // m_currentState = m_stateStack.top();
+    m_currentState->onExit();
+    m_currentState = m_stateStack.top();
+    m_currentState->onEntry();
   }
+
+}
+
+void
+App::onExit() {
 
 }
