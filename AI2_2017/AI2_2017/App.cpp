@@ -11,7 +11,7 @@
 #include "stdafx.h"
 #include "App.h"
 
-void
+bool
 App::onEntry() {
   
   m_logoS = new Logo_State();
@@ -30,6 +30,15 @@ App::onEntry() {
   m_stateStack.push(m_logoS);
   m_currentState = m_stateStack.top();
   m_currentState->m_fsm = this;
+
+  if (!m_defaultFont.loadFromFile("Aurebesh.otf")) {
+    std::cout<<"Failed to create default font from file...\n";
+    return false;
+  }
+  m_screen.m_text.setFont(m_defaultFont);
+  m_screen.m_text.setPosition(sf::Vector2f(0.0f,0.0f));
+  m_screen.m_text.setFillColor(sf::Color::White);
+  return true;
 }
 
 void 

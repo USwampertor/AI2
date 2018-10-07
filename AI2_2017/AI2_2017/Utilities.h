@@ -13,5 +13,6 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include <sstream>
 
 #include <SFML/Graphics.hpp>

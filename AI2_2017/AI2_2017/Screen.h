@@ -9,6 +9,9 @@
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 #pragma once
 
+
+#include <iostream>
+
 #include "Utilities.h"
 
 //forward declaration
@@ -66,6 +69,11 @@ class Screen
    */
 
  public:
+  
+  /**
+   * Text Object
+   */
+  sf::Text m_text;
 
   /**
    * Simple sfml rectangle to test the flow
@@ -73,6 +81,18 @@ class Screen
   sf::RectangleShape 
   m_shape;
   
+  /**
+   * Standard sf texture
+   */
+  sf::Texture
+  m_texture;
+
+  /**
+   * Standard sf image
+   */
+  sf::Sprite
+  m_logo;
+
   /**
    * SFML window to render stuff
    */

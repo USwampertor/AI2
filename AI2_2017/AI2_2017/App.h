@@ -34,7 +34,7 @@ class App
   /**
    * Sets up variables, initializes data ,etc
    */
-  void
+  bool
   onEntry();
 
   /**
@@ -61,6 +61,11 @@ class App
    */
 
  public:
+
+  /**
+   * Default Font for testing
+   */
+  sf::Font m_defaultFont;
 
   /**
    * State stack that checkes the order of objects
