@@ -68,12 +68,12 @@ class App
   sf::Font m_defaultFont;
 
   /**
-   * State stack that checkes the order of objects
+   * State stack that checks the order of objects
    */
   std::stack<State*> m_stateStack;
 
   /**
-   * the pointer to the current state de machin is
+   * the pointer to the current state the machine is
    */
   State* m_currentState;
   
@@ -81,7 +81,6 @@ class App
    * The graphics API wrapped in this thing
    */
   Screen m_screen;
-  
 
   /**
    * all states possibles for this FSM

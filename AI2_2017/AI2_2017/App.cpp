@@ -35,6 +35,7 @@ App::onEntry() {
     std::cout<<"Failed to create default font from file...\n";
     return false;
   }
+
   m_screen.m_text.setFont(m_defaultFont);
   m_screen.m_text.setPosition(sf::Vector2f(0.0f,0.0f));
   m_screen.m_text.setFillColor(sf::Color::White);
@@ -52,17 +53,16 @@ App::onUpdate() {
       m_screen.m_mainWindow.close();
       return;
       }
+
       if (!m_currentState->onUpdate(event)) {
         setState(nullptr);
       }
-      //else {
-      //  m_currentState = m_stateStack.top();
-      //}
-        //el estado tiene un puntero a su maquina de estados, con el cual activa el set state
 
     }
     if (m_currentState == nullptr) {m_screen.m_mainWindow.close();}
+    
     m_screen.CheckState(m_currentState);
+    
     m_screen.m_mainWindow.clear();
     m_screen.onRender();
     m_screen.m_mainWindow.display();
@@ -72,11 +72,7 @@ App::onUpdate() {
 
 void 
 App::setState(State* state) {
-/**
- * if(state is null)
-    if(stack is with something)
-      state = topofStack
- */
+
   if (state == nullptr) {
     if (!m_stateStack.empty()) {
       m_stateStack.pop();
@@ -84,10 +80,12 @@ App::setState(State* state) {
       m_currentState = m_stateStack.top();
       m_currentState->onEntry();
     }
+
     else {
       m_currentState = nullptr;
     }
   }
+
   else {
     //m_stateStack.pop();
     state->m_fsm = this;

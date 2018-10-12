@@ -41,6 +41,7 @@ void Pause_State::onExit() {
   ////delete m_fsm;
 }
 bool Logo_State::onUpdate(sf::Event event) {
+  
   ++counter;
   if (counter <= 5) { return true; }
   else {

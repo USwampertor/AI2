@@ -1,4 +1,9 @@
-﻿  Generando código
-  All 7 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Generación de código finalizada
-  AI2_2017.vcxproj -> C:\Users\PROPIETARIO\Documents\7mo Cuatri\AI2\AI2_2017\x86/Release/AI2_2017.exe
+﻿  stdafx.cpp
+  AI2_2017.cpp
+  Screen.cpp
+  App.cpp
+  State.cpp
+  Generating code
+  All 355 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  AI2_2017.vcxproj -> C:\Users\toa_l\Documents\7mo Cuatri\AI2\AI2_2017\x86/Release/AI2_2017.exe

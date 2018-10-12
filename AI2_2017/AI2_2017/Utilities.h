@@ -11,8 +11,10 @@
 #pragma once
 
 #include <iostream>
+#include <thread>
 #include <stack>
 #include <vector>
 #include <sstream>
 
+#include <lua.hpp>
 #include <SFML/Graphics.hpp>
