@@ -15,6 +15,7 @@
 #include <stack>
 #include <vector>
 #include <sstream>
+#include <string>
 
 #include <lua.hpp>
 #include <SFML/Graphics.hpp>
