@@ -11,7 +11,6 @@
 #pragma once
 #include "Utilities.h"
 
-
 class Character
 {
 public:
