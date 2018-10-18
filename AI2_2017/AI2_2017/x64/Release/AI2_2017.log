@@ -1,6 +1,0 @@
-﻿  stdafx.cpp
-  AI2_2017.cpp
-  Screen.cpp
-  App.cpp
-  State.cpp
-sfml-graphics.lib(sfml-graphics-2.dll) : fatal error LNK1112: module machine type 'x86' conflicts with target machine type 'x64'
