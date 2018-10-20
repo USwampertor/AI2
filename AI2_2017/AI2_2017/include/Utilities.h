@@ -17,5 +17,10 @@
 #include <sstream>
 #include <string>
 
+
 #include <lua.hpp>
 #include <SFML/Graphics.hpp>
+#include <sqlite3.h>
+
+static float sqr(float n) { return std::pow(n, 2); }
+static float round2(float n) { return std::round(n*2.0f) / 2.0f; }

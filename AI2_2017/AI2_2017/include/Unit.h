@@ -9,11 +9,11 @@
  /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 
 #pragma once
-#include "Utilities.h"
+#include "GameObject.h"
 
-class Unit
+class Unit : public GameObject
 {
-public:
+ public:
   /**
    * Default Constructor
    */
@@ -23,8 +23,13 @@ public:
    * Copy Constructor
    */
   Unit(const Unit& other) 
-    : m_name(other.m_name),
-      m_type(other.m_type) {};
+    : m_name      (other.m_name),
+      m_type      (other.m_type),
+      m_ID        (other.m_ID),
+      m_hp        (other.m_hp),
+      m_speed     (other.m_speed),
+      m_strength  (other.m_strength),
+      m_defense   (other.m_defense) {};
 
   /**
    * Constructor that sets the unit type
@@ -34,7 +39,7 @@ public:
   /**
    * Default Destructor
    */
-  ~Unit() = default;
+  ~Unit() {};
 
   /**
    * @brief sets the name of the unit
@@ -80,21 +85,39 @@ public:
     return m_type;
   }
 
-private:
-  /**
-   * const char* name component
-   */
-  std::string m_name;
+ private:
 
-  /**
-   * Unit unique ID
-   */
-  int m_ID;
+   /**
+    * UnitType Name
+    */
+   std::string m_name;
 
-  /**
-   * Unit Type ID
-   */
-  int m_type;
+   int m_ID;
+
+   /**
+    * unique ID from the database
+    */
+   int m_type;
+
+   /**
+    * standard health
+    */
+   int m_hp;
+
+   /**
+    * standard speed
+    */
+   int m_speed;
+
+   /**
+    * standard strength
+    */
+   int m_strength;
+
+   /**
+    * standard defense
+    */
+   int m_defense;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

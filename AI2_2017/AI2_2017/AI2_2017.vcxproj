@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -100,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir);$(DEVLIBS)SQLite/3.25.2/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir);$(DEVLIBS)SQLite/3.25.2/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir);$(DEVLIBS)SQLite/3.25.2/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +157,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(DEVLIBS)Lua/5.3.5/;$(ProjectDir)include/;$(ProjectDir);$(DEVLIBS)SQLite/3.25.2/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,7 +170,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\App.h" />
+    <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\Item.h" />
+    <ClInclude Include="include\ItemType.h" />
     <ClInclude Include="include\LuaRegisters.h" />
+    <ClInclude Include="include\UnitType.h" />
+    <ClInclude Include="include\Vector2.h" />
+    <ClInclude Include="include\Vector3.h" />
     <ClInclude Include="include\Screen.h" />
     <ClInclude Include="include\State.h" />
     <ClInclude Include="include\Unit.h" />
@@ -181,6 +187,12 @@
   <ItemGroup>
     <ClCompile Include="src\AI2_2017.cpp" />
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\Item.cpp" />
+    <ClCompile Include="src\ItemType.cpp" />
+    <ClCompile Include="src\UnitType.cpp" />
+    <ClCompile Include="src\Vector2.cpp" />
+    <ClCompile Include="src\Vector3.cpp" />
     <ClCompile Include="src\Screen.cpp" />
     <ClCompile Include="src\State.cpp" />
     <ClCompile Include="src\Unit.cpp" />
