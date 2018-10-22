@@ -9,14 +9,21 @@
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 #pragma once
 
-#include "Utilities.h"
+
+#include "ItemType.h"
 #include "Unit.h"
 #include "UnitType.h"
+#include "Utilities.h"
+
 class World
 {
 public:
   World() = default;
-  ~World();
+  ~World() {
+    m_unitsInGame.clear();
+    m_unitTypes.clear();
+    m_itemTypes.clear();
+  };
 
  public:
   
@@ -24,6 +31,6 @@ public:
 
    std::vector<UnitType> m_unitTypes;
 
-
+   std::vector<ItemType> m_itemTypes;
 };
 

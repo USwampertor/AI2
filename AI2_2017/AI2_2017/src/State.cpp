@@ -12,10 +12,13 @@
 #include "State.h"
 #include "App.h"
 
-bool State::operator == (State* s) {
+bool 
+State::operator == (State* s) {
   return this->m_ID == s->m_ID;
 }
-bool Pause_State::handleInput(sf::Event event) {
+
+bool 
+Pause_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::P) {
     return false;
   }
@@ -24,23 +27,25 @@ bool Pause_State::handleInput(sf::Event event) {
   }
   return true;
 }
-
-bool Pause_State::onUpdate(sf::Event event) {
+bool 
+Pause_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-
-void Pause_State::onEntry() {
+void 
+Pause_State::onEntry() {
   std::cout << "Pause" << std::endl;
   m_ID = 0;
 }
-
-void Pause_State::onExit() {
+void 
+Pause_State::onExit() {
   ////delete m_fsm;
 }
-bool Logo_State::onUpdate(sf::Event event) {
+
+bool 
+Logo_State::onUpdate(sf::Event event) {
   
   ++counter;
   if (counter <= 5) { return true; }
@@ -49,51 +54,57 @@ bool Logo_State::onUpdate(sf::Event event) {
   }
   return true;
 }
-
-bool Logo_State::handleInput(sf::Event event) {
+bool 
+Logo_State::handleInput(sf::Event event) {
   //if (event.key.code == sf::Keyboard::Space) {
   //std::cout<<"you pressed Space";
   //SetState()
   //}
   return true;
 }
-
-void Logo_State::onEntry() {
+void 
+Logo_State::onEntry() {
   std::cout << "Logo" << std::endl;
   m_ID = 1;
 }
-
-void Logo_State::onExit() {
+void 
+Logo_State::onExit() {
   //delete m_fsm;
 }
 
-bool Help_State::handleInput(sf::Event event) {
+bool 
+Help_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
     return false;
   }
   return true;
 }
-bool Help_State::onUpdate(sf::Event event) {
+bool 
+Help_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void Help_State::onEntry() {
+void 
+Help_State::onEntry() {
   std::cout << "Help" << std::endl;
   m_ID = 2;
 }
-void Help_State::onExit() {
+void 
+Help_State::onExit() {
   //delete m_fsm;
 }
 
-bool Menu_State::onUpdate(sf::Event event) {
+bool 
+Menu_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-bool Menu_State::handleInput(sf::Event event) {
+bool 
+Menu_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::O) {
     m_fsm->setState(m_fsm->m_optnS);
   }
@@ -108,14 +119,17 @@ bool Menu_State::handleInput(sf::Event event) {
   }
   return true;
 }
-void Menu_State::onEntry() {
+void 
+Menu_State::onEntry() {
   std::cout << "Menu" << std::endl;
   m_ID = 3;
 }
-void Menu_State::onExit() {
+void 
+Menu_State::onExit() {
 }
 
-bool GameOver_State::handleInput(sf::Event event) {
+bool 
+GameOver_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Space) {
     m_fsm->setState(m_fsm->m_playS);
   }
@@ -124,21 +138,25 @@ bool GameOver_State::handleInput(sf::Event event) {
   }
   return true;
 }
-bool GameOver_State::onUpdate(sf::Event event) {
+bool 
+GameOver_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void GameOver_State::onEntry() {
+void 
+GameOver_State::onEntry() {
   std::cout << "Game Over" << std::endl;
   m_ID = 4;
 }
-void GameOver_State::onExit() {
+void 
+GameOver_State::onExit() {
   //delete m_fsm;
 }
 
-bool Play_State::handleInput(sf::Event event) {
+bool 
+Play_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::H) {
     m_fsm->setState(m_fsm->m_helpS);
   }
@@ -147,21 +165,33 @@ bool Play_State::handleInput(sf::Event event) {
   }
   return true;
 }
-bool Play_State::onUpdate(sf::Event event) {
+bool 
+Play_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void Play_State::onEntry() {
+void 
+Play_State::onEntry() {
   std::cout << "Playing..." << std::endl;
   m_ID = 5;
+  m_mainCamera = m_fsm->m_screen.m_mainWindow.getDefaultView();
+  m_mainCamera.setSize(m_mainCamera.getSize().x, m_mainCamera.getSize().y*2.0f);
+  m_mainCamera.setCenter(m_mainCamera.getSize()*0.5f);
+ 
+  m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
+  m_fsm->m_screen.m_mainWindow.setView(m_fsm->m_screen.m_mainWindow.getDefaultView());
+  
+
 }
-void Play_State::onExit() {
+void 
+Play_State::onExit() {
   //delete m_fsm;
 }
 
-bool Options_State::handleInput(sf::Event event) {
+bool 
+Options_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::P) {
     m_fsm->setState(m_fsm->m_gameS);
   }
@@ -176,76 +206,91 @@ bool Options_State::handleInput(sf::Event event) {
   }
   return true;
 }
-bool Options_State::onUpdate(sf::Event event) {
+bool 
+Options_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void Options_State::onEntry() {
+void 
+Options_State::onEntry() {
   std::cout << "Options" << std::endl;
   m_ID = 6;
 }
-void Options_State::onExit() {
+void 
+Options_State::onExit() {
   //delete m_fsm;
 }
 
-bool GamePlay_State::handleInput(sf::Event event) {
+bool 
+GamePlay_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
     return false;
   }
   return true;
 }
-bool GamePlay_State::onUpdate(sf::Event event) {
+bool 
+GamePlay_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void GamePlay_State::onEntry() {
+void 
+GamePlay_State::onEntry() {
   std::cout << "Gameplay" << std::endl;
   m_ID = 7;
 }
-void GamePlay_State::onExit() {
+void 
+GamePlay_State::onExit() {
   //delete m_fsm;
 }
 
-bool Graphics_State::handleInput(sf::Event event) {
+bool
+Graphics_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
     return false;
   }
   return true;
 }
-bool Graphics_State::onUpdate(sf::Event event) {
+bool 
+Graphics_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void Graphics_State::onEntry() {
+void 
+Graphics_State::onEntry() {
   std::cout << "Graphics" << std::endl;
   m_ID = 8;
 }
-void Graphics_State::onExit() {
+void 
+Graphics_State::onExit() {
   //delete m_fsm;
 }
 
-bool Sound_State::handleInput(sf::Event event) {
+bool 
+Sound_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
     return false;
   }
   return true;
 }
-bool Sound_State::onUpdate(sf::Event event) {
+bool 
+Sound_State::onUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
     return handleInput(event);
   }
   return true;
 }
-void Sound_State::onEntry() {
+void 
+Sound_State::onEntry() {
   std::cout << "Sound" << std::endl;
   m_ID = 9;
 }
-void Sound_State::onExit() {
+void 
+Sound_State::onExit() {
   //delete m_fsm;
 }

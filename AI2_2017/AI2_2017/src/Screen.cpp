@@ -34,6 +34,8 @@ Screen::createWindow() {
   m_texture.loadFromFile("resources/Pato.png");
   m_logo.setTexture(m_texture);
   m_logo.setPosition(sf::Vector2f(200,100));
+  m_logo.setRotation(45.f);
+  m_logo.setPosition(m_logo.getPosition().x, m_logo.getPosition().y*2.0f);
   return true;
 }
 

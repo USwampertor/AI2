@@ -17,6 +17,7 @@ class App;
 
 
 /**
+* State
 * Description:
 *   The states of the App FSM
 * Sample usage:
@@ -119,6 +120,7 @@ class Pause_State : public State
    */
   void onExit();
 };
+
 class Logo_State : public State 
 {
  public:
@@ -256,6 +258,7 @@ class GameOver_State : public State
   void onExit();
   
 };
+
 class Play_State : public State 
 {
  public:
@@ -286,7 +289,19 @@ class Play_State : public State
    */
   void onExit();
   
+
+  /**
+   * The normal camera for isometric projection
+   */
+  sf::View m_mainCamera;
+
+  /**
+   * The minimap camera in the left bottom screen position
+   */
+  sf::View m_miniMapCamera;
+
 };
+
 class Options_State : public State 
 {
  public:
@@ -318,6 +333,7 @@ class Options_State : public State
   void onExit();
   
 };
+
 class GamePlay_State : public State 
 {
  public:
