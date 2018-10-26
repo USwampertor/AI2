@@ -71,36 +71,10 @@ class Screen
  public:
   
   /**
-   * Text Object
-   */
-  sf::Text m_text;
-
-  /**
-   * Simple sfml rectangle to test the flow
-   */
-  sf::RectangleShape 
-  m_shape;
-  
-  /**
-   * Standard sf texture
-   */
-  sf::Texture
-  m_texture;
-
-  /**
-   * Standard sf image
-   */
-  sf::Sprite
-  m_logo;
-
-  /**
    * SFML window to render stuff
    */
   sf::RenderWindow m_mainWindow;
   
-  /**
-   * Vector of all drawable objects
-   */
-  std::vector<sf::Drawable*> m_objects;
+  sf::Text m_testText;
 };
 

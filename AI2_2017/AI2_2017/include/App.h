@@ -73,6 +73,11 @@ class App
   std::stack<State*> m_stateStack;
 
   /**
+   * the font map to access all fonts
+   */
+  std::map<std::string, sf::Font> m_fontMap;
+
+  /**
    * the pointer to the current state the machine is
    */
   State* m_currentState;

@@ -52,7 +52,8 @@ class State
    * @return true if the state should keep working | false if it finished
    * 
    */
-  virtual bool handleInput(sf::Event event) = 0;
+  virtual bool 
+  handleInput(sf::Event event) = 0;
   
   /**
    * @brief Updates the state of the object if needed
@@ -60,18 +61,35 @@ class State
    * @return true if the state should keep working | false if it finished
    * 
    */
-  virtual bool onUpdate(sf::Event event) = 0;
+  virtual bool 
+  onInputUpdate(sf::Event event) = 0;
   
   /**
    * State initialization
    */
-  virtual void onEntry() = 0;
+  virtual void 
+  onEntry() = 0;
   
   /**
    * State finishing
    */
-  virtual void onExit() = 0;
- 
+  virtual void 
+  onExit() = 0;
+  
+  /**
+   * State draws whatever it has in its possession
+   */
+  virtual void 
+  onRender( sf::RenderWindow* window ) = 0;
+
+  /**
+   * @brief updates the state without taking an event
+   * @param
+   * @return
+   *
+   */
+  virtual void 
+  onUpdate() = 0;
 
   /**
    * Member declaration
@@ -87,6 +105,12 @@ class State
    * the ID of the state to recognize it among the others
    */
   unsigned short m_ID;
+
+
+  /**
+   * the clock for getting delta times
+   */
+  sf::Clock m_time;
   
 };
 
@@ -100,7 +124,8 @@ class Pause_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -108,17 +133,33 @@ class Pause_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
+
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
+
 };
 
 class Logo_State : public State 
@@ -131,26 +172,41 @@ class Logo_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
   
   /**
-   * @brief Updates the state of the object if needed
+   * @brief Updates the state of the object if needed with an event
    * @param the event polled
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 
   /**
    * Member declaration
@@ -160,7 +216,12 @@ class Logo_State : public State
   /**
    * poll ticks counter for testing
    */
-  int counter;
+  float counter;
+
+  /**
+   * logo of the company
+   */
+  sf::Sprite m_logo;
 };
 
 class Help_State : public State 
@@ -173,7 +234,8 @@ class Help_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -181,18 +243,32 @@ class Help_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 };
 
 class Menu_State : public State 
@@ -205,7 +281,8 @@ class Menu_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -213,18 +290,44 @@ class Menu_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
+
+ public:
+
+  /**
+   * map sprite
+   */
+   sf::Sprite m_map;
+
+  /**
+   * title text
+   */
+  sf::Text m_title;
 };
 
 class GameOver_State : public State 
@@ -237,7 +340,8 @@ class GameOver_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
   
   /**
    * @brief Updates the state of the object if needed
@@ -245,18 +349,32 @@ class GameOver_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 };
 
 class Play_State : public State 
@@ -269,7 +387,8 @@ class Play_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
   
   /**
    * @brief Updates the state of the object if needed
@@ -277,18 +396,32 @@ class Play_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 
   /**
    * The normal camera for isometric projection
@@ -296,10 +429,19 @@ class Play_State : public State
   sf::View m_mainCamera;
 
   /**
-   * The minimap camera in the left bottom screen position
+   * The mini map camera in the left bottom screen position
    */
   sf::View m_miniMapCamera;
 
+  /**
+   * test texture
+   */
+  sf::Sprite m_testMap;
+
+  /**
+   * the position of the mouse saved in the last frame
+   */
+  sf::Vector2i m_mousePosition;
 };
 
 class Options_State : public State 
@@ -312,7 +454,8 @@ class Options_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -320,18 +463,32 @@ class Options_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 };
 
 class GamePlay_State : public State 
@@ -344,7 +501,8 @@ class GamePlay_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -352,18 +510,32 @@ class GamePlay_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 };
 
 class Graphics_State : public State 
@@ -376,7 +548,8 @@ class Graphics_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -384,18 +557,32 @@ class Graphics_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 };
 
 class Sound_State : public State 
@@ -408,7 +595,8 @@ class Sound_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool handleInput(sf::Event event);
+  bool 
+  handleInput(sf::Event event);
 
   /**
    * @brief Updates the state of the object if needed
@@ -416,16 +604,30 @@ class Sound_State : public State
    * @return true if the state should keep working | false if it finished
    *
    */
-  bool onUpdate(sf::Event event);
+  bool 
+  onInputUpdate(sf::Event event);
 
   /**
    * State initialization
    */
-  void onEntry();
+  void 
+  onEntry();
 
   /**
    * State finishing
    */
-  void onExit();
+  void 
+  onExit();
   
+  /**
+   * State draws all its objects and sprites and what not
+   */
+  void 
+  onRender(sf::RenderWindow* window);
+
+  /**
+   * Updates the state
+   */
+  void
+  onUpdate();
 };
