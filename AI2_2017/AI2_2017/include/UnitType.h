@@ -45,12 +45,14 @@ class UnitType
   ~UnitType() {};
 
   /**
-   * @brief 
-   * @param 
+   * @brief gets the information of a unit Type from the database and loads it 
+   * into this unit
+   * @param the id of the unit
    * @return 
    *
    */
-  void loadFromDb();
+  void 
+  loadFromDb(const int id);
 
  public:
   

@@ -23,7 +23,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <SFML/Audio.hpp>
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 static float sqr(float n) { return std::pow(n, 2); }
 

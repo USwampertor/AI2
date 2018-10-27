@@ -8,7 +8,6 @@
  */
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 
-#include "stdafx.h"
 #include "State.h"
 #include "App.h"
 
@@ -257,6 +256,7 @@ bool
 Play_State::handleInput(sf::Event event) {
 
   if (event.type == sf::Event::KeyPressed) {
+
     if (event.key.code == sf::Keyboard::H) {
       m_fsm->setState(m_fsm->m_helpS);
     }
@@ -316,6 +316,18 @@ Play_State::handleInput(sf::Event event) {
 
   }
 
+  else if (event.type == sf::Event::MouseWheelMoved) {
+    std::cout << "mouse scrolled" << std::endl;
+    if (event.mouseWheel.delta < 0.0f) {
+      m_mainCamera.zoom(0.9f); 
+      std::cout << event.mouseWheel.delta;
+    }
+
+    if (event.mouseWheel.delta > 0.0f) { 
+      m_mainCamera.zoom(1.1f); 
+      std::cout << event.mouseWheel.delta;
+    }
+  }
 
 
   return true;
@@ -325,7 +337,8 @@ bool
 Play_State::onInputUpdate(sf::Event event) {
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
   if (event.type == sf::Event::KeyPressed || 
-      event.type == sf::Event::MouseMoved) {
+      event.type == sf::Event::MouseMoved ||
+      event.type == sf::Event::MouseWheelMoved) {
     return handleInput(event);
 
   }
@@ -355,7 +368,7 @@ Play_State::onEntry() {
     m_fsm->m_screen.m_mainWindow.getDefaultView().getSize() };
   
   m_miniMapCamera.setViewport(sf::FloatRect(0.05f, 0.705f, 0.25f, 0.25f));
-  m_miniMapCamera.zoom(1.5f);
+  m_miniMapCamera.zoom(0.9f);
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
   m_fsm->m_screen.m_mainWindow.setView(m_fsm->m_screen.m_mainWindow.getDefaultView());
   
