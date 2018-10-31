@@ -79,7 +79,10 @@ App::onUpdate() {
       m_screen.m_mainWindow.close();
       return;
       }
-
+      if (event.type == sf::Event::Resized) {
+        sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+        m_screen.m_mainWindow.setView(sf::View(visibleArea));
+      }
       if (!m_currentState->onInputUpdate(event)) {
         setState(nullptr);
       }

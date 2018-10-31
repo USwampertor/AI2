@@ -100,13 +100,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/rapidjson/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/;$(DEVLIBS)SFML/2.5/build/lib/$(Configuration);$(DEVLIBS)tinyxml2/build/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies);luac.lib;lua5.3.5.lib;tinyxml2d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/$(PlatformTarget)/;$(DEVLIBS)SFML/2.5/$(PlatformTarget)/lib/$(Configuration)/;$(DEVLIBS)tinyxml2/build/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies);lua5.3.5.lib;tinyxml2d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,13 +117,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/rapidjson/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/;$(DEVLIBS)SFML/2.5/build/lib/$(Configuration);$(DEVLIBS)tinyxml2/build/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies);luac.lib;lua5.3.5.lib;tinyxml2d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/$(PlatformTarget)/;$(DEVLIBS)SFML/2.5/$(PlatformTarget)/lib/$(Configuration)/;$(DEVLIBS)tinyxml2/build/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-system-d.lib;%(AdditionalDependencies);lua5.3.5.lib;tinyxml2d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -136,15 +136,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/rapidjson/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/;$(DEVLIBS)SFML/2.5/build/lib/$(Configuration);$(DEVLIBS)tinyxml2/build/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;sfml-system.lib;%(AdditionalDependencies);luac.lib;lua5.3.5.lib;tinyxml2.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/$(PlatformTarget)/;$(DEVLIBS)SFML/2.5/$(PlatformTarget)/lib/$(Configuration)/;$(DEVLIBS)tinyxml2/build/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;sfml-system.lib;%(AdditionalDependencies);lua5.3.5.lib;tinyxml2.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,19 +157,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/rapidjson/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DEVLIBS)SFML/2.5/include/;$(DEVLIBS)Lua/5.3.5/include/;$(ProjectDir)include/;$(DEVLIBS)rapidjson/include/;$(DEVLIBS)stb/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/;$(DEVLIBS)SFML/2.5/build/lib/$(Configuration);$(DEVLIBS)tinyxml2/build/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;sfml-system.lib;%(AdditionalDependencies);luac.lib;lua5.3.5.lib;tinyxml2.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(DEVLIBS)Lua/5.3.5/lib/$(PlatformTarget)/;$(DEVLIBS)SFML/2.5/$(PlatformTarget)/lib/$(Configuration)/;$(DEVLIBS)tinyxml2/build/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-network.lib;sfml-system.lib;%(AdditionalDependencies);lua5.3.5.lib;tinyxml2.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\App.h" />
+    <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\Item.h" />
     <ClInclude Include="include\ItemType.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\sqlite3.h" />
     <ClInclude Include="include\sqlite3ext.h" />
+    <ClInclude Include="include\Textbox.h" />
     <ClInclude Include="include\Tile.h" />
     <ClInclude Include="include\UnitType.h" />
     <ClInclude Include="include\Vector2.h" />
@@ -193,6 +195,7 @@
   <ItemGroup>
     <ClCompile Include="src\AI2_2017.cpp" />
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemType.cpp" />
@@ -200,6 +203,7 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\shell.c" />
     <ClCompile Include="src\sqlite3.c" />
+    <ClCompile Include="src\TextBox.cpp" />
     <ClCompile Include="src\Tile.cpp" />
     <ClCompile Include="src\UnitType.cpp" />
     <ClCompile Include="src\Vector2.cpp" />

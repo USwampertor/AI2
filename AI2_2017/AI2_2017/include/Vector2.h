@@ -443,6 +443,18 @@ public:
   isZero() const;
 
   /**
+   * Changes cartesian to isometric coordinates
+   */
+  Vector2
+  CartesianToIsometric(Vector2 cartesian);
+
+  /**
+   * 
+   */
+  Vector2
+  IsometricToCartesian(Vector2 isometric);
+
+  /**
    * static const
    */
 

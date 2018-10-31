@@ -184,14 +184,26 @@ Menu_State::onEntry() {
   
   m_title.setFont(m_fsm->m_fontMap["old"]);
   m_title.setString("RUNESTONE");
-  m_title.setFillColor(sf::Color::Black);
   m_title.setOutlineThickness(2.0f);
-  m_title.setCharacterSize(30);
+  m_title.setFillColor(sf::Color::Black);
   m_title.setOutlineColor(sf::Color::White);
+  m_title.setCharacterSize(30);
   m_title.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
                                    m_title.getLocalBounds().width / 2,
                                    m_fsm->m_screen.m_mainWindow.getSize().y / 2 -
                                    m_title.getLocalBounds().height / 2 ));
+
+  m_play.m_text.setFont(m_fsm->m_fontMap["old"]);
+  m_play.m_text.setString("PLAY");
+  m_play.m_text.setOutlineThickness(2.0f);
+  m_play.m_text.setFillColor(sf::Color::Black);
+  m_play.m_text.setOutlineColor(sf::Color::Red);
+  m_play.m_text.setCharacterSize(30);
+  m_play.setSize(100.0f, 100.0f);
+  m_play.setSprite("resources/sprites/startButton.png");
+  m_play.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
+                                  m_play.m_box.getLocalBounds().width / 2,
+                                  m_fsm->m_screen.m_mainWindow.getSize().y / 2));
 
 }
 
@@ -203,6 +215,7 @@ void
 Menu_State::onRender(sf::RenderWindow* window) {
   window->draw(m_map);
   window->draw(m_title);
+  m_play.draw(window);
 }
 
 void
@@ -278,37 +291,43 @@ Play_State::handleInput(sf::Event event) {
 
   else if (event.type == sf::Event::MouseMoved) {
     
-    if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x < 10) {
+    if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x < 20 &&
+        sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x > 0) {
       
-      sf::Mouse::setPosition(sf::Vector2i(10, m_mousePosition.y), 
+      sf::Mouse::setPosition(sf::Vector2i(20, m_mousePosition.y), 
                              m_fsm->m_screen.m_mainWindow);
       
       m_mainCamera.move(-10.0f, 0);
     }
 
     if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x > 
-        m_fsm->m_screen.m_mainWindow.getSize().x - 10) {
+        m_fsm->m_screen.m_mainWindow.getSize().x - 20 &&
+        sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x <
+        m_fsm->m_screen.m_mainWindow.getSize().x) {
       
-      sf::Mouse::setPosition(sf::Vector2i(m_fsm->m_screen.m_mainWindow.getSize().x - 10,
+      sf::Mouse::setPosition(sf::Vector2i(m_fsm->m_screen.m_mainWindow.getSize().x - 20,
                                           m_mousePosition.y),
                              m_fsm->m_screen.m_mainWindow);
 
       m_mainCamera.move(10.0f, 0);
     }
 
-    if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y < 10) {
+    if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y < 20 &&
+        sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y > 0) {
 
-      sf::Mouse::setPosition(sf::Vector2i(m_mousePosition.x, 10),
+      sf::Mouse::setPosition(sf::Vector2i(m_mousePosition.x, 20),
                              m_fsm->m_screen.m_mainWindow);
 
       m_mainCamera.move(0.0f, -10.0f);
     }
 
     if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y >
-        m_fsm->m_screen.m_mainWindow.getSize().y - 10) {
+        m_fsm->m_screen.m_mainWindow.getSize().y - 20 &&
+        sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y <
+        m_fsm->m_screen.m_mainWindow.getSize().y) {
 
       sf::Mouse::setPosition(sf::Vector2i(m_mousePosition.x,
-                                          m_fsm->m_screen.m_mainWindow.getSize().y - 10),
+                                          m_fsm->m_screen.m_mainWindow.getSize().y - 20),
                              m_fsm->m_screen.m_mainWindow);
 
       m_mainCamera.move(0.0f, 10.0f);
@@ -350,6 +369,9 @@ Play_State::onEntry() {
   std::cout << "Playing..." << std::endl;
   m_ID = 5;
 
+  m_world.initialization();
+
+  //Only for testing
   sf::Texture* t = new sf::Texture();
   t->loadFromFile("resources/sprites/minecraft.jpg");
   m_testMap.setTexture(*t);
@@ -358,17 +380,20 @@ Play_State::onEntry() {
     m_fsm->m_screen.m_mainWindow.getSize().y / 2 -
     m_testMap.getGlobalBounds().height / 2));
 
-
+  //camera creation
   m_mainCamera = { 
     m_fsm->m_screen.m_mainWindow.getDefaultView().getCenter(),
     m_fsm->m_screen.m_mainWindow.getDefaultView().getSize() };
   
+  //mini map creation
   m_miniMapCamera = {
     m_fsm->m_screen.m_mainWindow.getDefaultView().getCenter(),
     m_fsm->m_screen.m_mainWindow.getDefaultView().getSize() };
   
   m_miniMapCamera.setViewport(sf::FloatRect(0.05f, 0.705f, 0.25f, 0.25f));
   m_miniMapCamera.zoom(0.9f);
+  
+  //Main camera setting
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
   m_fsm->m_screen.m_mainWindow.setView(m_fsm->m_screen.m_mainWindow.getDefaultView());
   

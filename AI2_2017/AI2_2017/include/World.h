@@ -11,9 +11,11 @@
 
 
 #include "ItemType.h"
+#include "Tile.h"
 #include "Unit.h"
 #include "UnitType.h"
 #include "Utilities.h"
+
 
 class World
 {
@@ -25,12 +27,42 @@ public:
     m_itemTypes.clear();
   };
 
+  /**
+   * initialization of world
+   */
+  void
+  initialization();
+  
+  void
+  createUnit(int id);
+
+  void
+  createUnitType(int id);
+
+  UnitType* 
+  getUnitType(int id);
+
  public:
   
-   std::vector<Unit> m_unitsInGame;
+  /**
+   * the list of all units in-game
+   */
+  std::vector<Unit> m_unitsInGame;
+  
+  /**
+   * List of all unitTypes from data base
+   */
+  std::vector<UnitType> m_unitTypes;
+  
+  /**
+   * list of item types from database
+   */
+  std::vector<ItemType> m_itemTypes;
 
-   std::vector<UnitType> m_unitTypes;
+  /**
+   * tileMap Atlas
+   */
+  std::vector<Tile> m_tileMap;
 
-   std::vector<ItemType> m_itemTypes;
 };
 

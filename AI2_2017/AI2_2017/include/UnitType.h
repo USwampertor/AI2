@@ -54,6 +54,15 @@ class UnitType
   void 
   loadFromDb(const int id);
 
+  /**
+   * @brief loads the sprites of the object (if it has any)
+   * @param string sprite names
+   * @return 
+   *
+   */
+  void
+  loadSprites(std::string spriteName);
+
  public:
   
   /**
@@ -64,7 +73,7 @@ class UnitType
   /**
    * unique ID from the database
    */
-  int m_typeID;
+  unsigned int m_typeID;
   
   /**
    * standard health

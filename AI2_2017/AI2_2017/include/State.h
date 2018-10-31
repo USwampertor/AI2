@@ -11,7 +11,9 @@
 #pragma once
 
 #include "Utilities.h"
-
+#include "World.h"
+#include "Button.h"
+#include "Textbox.h"
 //forward declaration
 class App;
 
@@ -328,6 +330,13 @@ class Menu_State : public State
    * title text
    */
   sf::Text m_title;
+
+  /**
+   * Play button
+   */
+  Button m_play;
+
+
 };
 
 class GameOver_State : public State 
@@ -442,6 +451,11 @@ class Play_State : public State
    * the position of the mouse saved in the last frame
    */
   sf::Vector2i m_mousePosition;
+
+  /**
+   * World object with all the stuff from the game
+   */
+  World m_world;
 };
 
 class Options_State : public State 
