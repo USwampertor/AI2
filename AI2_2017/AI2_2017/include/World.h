@@ -62,7 +62,12 @@ public:
   /**
    * tileMap Atlas
    */
-  std::vector<Tile> m_tileMap;
+  std::map<std::string, sf::Sprite> m_TileMap;
+
+  /**
+   * tile vector that will be rendered in-game
+   */
+  std::vector<sf::Sprite> m_tiles;
 
 };
 
