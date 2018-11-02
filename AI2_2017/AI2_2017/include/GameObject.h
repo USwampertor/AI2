@@ -27,12 +27,68 @@ class GameObject
    */
   virtual ~GameObject() {};
 
-  
+  /**
+   * @brief returns the ID of the object
+   * @param 
+   * @return the ID
+   *
+   */
+  int
+  getID();
+
+  /**
+   * @brief sets the unique ID of the Object
+   * @param the ID to set to the game Object
+   * @return 
+   *
+   */
+  void
+  setID(const int id);
+
+  /**
+   * @brief sets the position of the object in world space
+   * @param coordinates of the object in world space
+   * @return 
+   *
+   */
+  void 
+  setPosition(float x, float y);
+
+  /**
+   * @brief sets the position of the object in world space
+   * @param coordinates of the object in world space
+   * @return
+   *
+   */
+  void
+  setPosition(sf::Vector2f position);
+
+  /**
+   * @brief sets the position of the object in world space
+   * @param coordinates of the object in world space
+   * @return
+   *
+   */
+  void
+  setPosition(Vector2 position);
 
  private:
   
   /**
-   * position of gameObject in world 
+   * position X of gameObject in world 
    */
+  Vector2 m_position;
+
+  /**
+   * ID of the game object
+   */
+  int m_ID;
+
 };
 
+
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * GameObject.h Lua registration
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

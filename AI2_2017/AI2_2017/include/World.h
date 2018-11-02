@@ -34,7 +34,7 @@ public:
   initialization();
   
   void
-  createUnit(int id);
+  createUnit(int id, Vector2 position);
 
   void
   createUnitType(int id);
@@ -69,5 +69,15 @@ public:
    */
   std::vector<sf::Sprite> m_tiles;
 
+  /**
+   * creates the IDs of the objects, it increment each time a unit is created
+   */
+  int id_Creator;
+
 };
 
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * World.h Lua registration
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

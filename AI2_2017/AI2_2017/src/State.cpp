@@ -287,6 +287,10 @@ Play_State::handleInput(sf::Event event) {
       m_fsm->setState(m_fsm->m_helpS);
     }
 
+    if (event.key.code == sf::Keyboard::D) {
+      m_world.createUnit(1,Vector2(0,0));
+    }
+
   }
 
   else if (event.type == sf::Event::MouseMoved) {
@@ -414,6 +418,10 @@ Play_State::onRender(sf::RenderWindow* window) {
   window->draw(m_testMap);
 
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
+
+  for (auto unit : m_world.m_unitsInGame) {
+    window->draw(unit.m_actualFrame);
+  }
 } 
 
 void

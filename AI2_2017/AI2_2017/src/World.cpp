@@ -53,6 +53,23 @@ World::initialization() {
 
 }
 
+void
+World::createUnit(int id, Vector2 position) {
+  
+  Unit u(*getUnitType(id));
+  u.setID(id_Creator);
+  u.setPosition(position);
+ 
+  m_unitsInGame.push_back(u);
+
+  ++id_Creator;
+}
+
+UnitType*
+World::getUnitType(int id) {
+  return &m_unitTypes[id];
+}
+
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 /**
  * World.cpp Lua registration

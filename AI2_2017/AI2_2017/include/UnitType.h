@@ -37,12 +37,19 @@ class UnitType
       m_speed(other.m_speed),
       m_strength(other.m_strength),
       m_defense(other.m_defense),
-      m_name(other.m_name){}
+      m_name(other.m_name),
+      m_north(other.m_north),
+      m_northWest(other.m_northWest),
+      m_west(other.m_west),
+      m_southWest(other.m_southWest),
+      m_south(other.m_south) {}
 
   /**
    * Destructor
    */
-  ~UnitType() {};
+  ~UnitType() {
+    m_textureVector.clear();
+  };
 
   /**
    * @brief gets the information of a unit Type from the database and loads it 
@@ -95,5 +102,22 @@ class UnitType
    */
   int m_defense;
 
+
+  /**
+   * Sprite resources
+   */
+
+  sf::Sprite m_north;
+
+  sf::Sprite m_northWest;
+
+  sf::Sprite m_west;
+
+  sf::Sprite m_southWest;
+
+  sf::Sprite m_south;
+
+
+  std::vector<sf::Texture*> m_textureVector;
 };
 

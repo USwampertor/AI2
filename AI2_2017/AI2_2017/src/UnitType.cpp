@@ -4,6 +4,8 @@
 int
 mountData(void* data, int count, char** value, char** columns) {
 
+
+  //LOad default data from the database to unitType
   UnitType* p = (UnitType*)data;
 
   p->m_typeID = (unsigned int)value[0];
@@ -12,8 +14,37 @@ mountData(void* data, int count, char** value, char** columns) {
   p->m_speed = atoi(value[3]);
   p->m_strength = atoi(value[4]);
   p->m_defense = atoi(value[5]);
+
+  //Check if UnitType has defined any sprites inside
+  if (atoi(value[6]) != 0) {
+    //Load sprite info
+
+    //return 0;
+  }
+
+  //if it doesn't have anything inside, let's give him a default sprite
+
+  sf::Texture* defaultT = new sf::Texture();
+  if (defaultT->loadFromFile("resources/sprites/defaultSprite.jpg")) {
+    std::cout << "Couldn't even load default sprite... " << std::endl;
+    
+    p->m_textureVector.push_back(defaultT);
+
+    p->m_north.setTexture(*p->m_textureVector[0]);
+    p->m_south.setTexture(*p->m_textureVector[0]);
+    p->m_west.setTexture(*p->m_textureVector[0]);
+    p->m_northWest.setTexture(*p->m_textureVector[0]);
+    p->m_southWest.setTexture(*p->m_textureVector[0]);
+  }
+
   return 0;
 }
+
+void
+UnitType::loadSprites(std::string spriteName) {
+  //Here we would use the json file to reach the objects inside of it and set the textures
+}
+
 
 void
 UnitType::loadFromDb(const int id) {

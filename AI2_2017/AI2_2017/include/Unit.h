@@ -10,6 +10,7 @@
 
 #pragma once
 #include "GameObject.h"
+#include "UnitType.h"
 
 class Unit : public GameObject
 {
@@ -22,14 +23,38 @@ class Unit : public GameObject
   /**
    * Copy Constructor
    */
-  Unit(const Unit& other) 
-    : m_name      (other.m_name),
-      m_type      (other.m_type),
-      m_ID        (other.m_ID),
-      m_hp        (other.m_hp),
-      m_speed     (other.m_speed),
-      m_strength  (other.m_strength),
-      m_defense   (other.m_defense) {};
+  Unit(const Unit& other) {
+    m_name = other.m_name;
+    m_type = other.m_type;
+    m_hp = other.m_hp;
+    m_speed = other.m_speed;
+    m_strength = other.m_strength;
+    m_defense = other.m_defense;
+    m_north = other.m_north;
+    m_northWest = other.m_northWest;
+    m_west = other.m_west;
+    m_southWest = other.m_southWest;
+    m_south = other.m_south;
+    m_actualFrame = m_south;
+  };
+
+  /**
+   * Constructor based of a UnitType
+   */
+  Unit(const UnitType& source) 
+    : m_name(source.m_name),
+      m_type(source.m_typeID),
+      m_hp(source.m_hp),
+      m_speed(source.m_speed),
+      m_strength(source.m_strength),
+      m_defense(source.m_defense),
+      m_north(source.m_north),
+      m_northWest(source.m_northWest),
+      m_west(source.m_west),
+      m_southWest(source.m_southWest),
+      m_south(source.m_south) {
+      m_actualFrame = m_south;
+  };
 
   /**
    * Constructor that sets the unit type
@@ -92,8 +117,6 @@ class Unit : public GameObject
     */
    std::string m_name;
 
-   int m_ID;
-
    /**
     * unique ID from the database
     */
@@ -118,6 +141,23 @@ class Unit : public GameObject
     * standard defense
     */
    int m_defense;
+
+   /**
+   * Sprite resources
+   */
+
+   sf::Sprite m_north;
+
+   sf::Sprite m_northWest;
+
+   sf::Sprite m_west;
+
+   sf::Sprite m_southWest;
+
+   sf::Sprite m_south;
+   
+  public:
+   sf::Sprite m_actualFrame;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
