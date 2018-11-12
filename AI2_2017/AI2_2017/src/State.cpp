@@ -11,7 +11,11 @@
 #include "State.h"
 #include "App.h"
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Base state
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 State::operator == (State* s) {
   return this->m_ID == s->m_ID;
@@ -57,7 +61,11 @@ Pause_State::onUpdate() {
 
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Logo state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 Logo_State::onInputUpdate(sf::Event event) {
   
@@ -106,7 +114,11 @@ Logo_State::onUpdate() {
   }
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Help state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 Help_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
@@ -144,7 +156,11 @@ Help_State::onUpdate() {
 
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Menu state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 Menu_State::onInputUpdate(sf::Event event) {
   if (event.type == sf::Event::KeyPressed) {
@@ -223,7 +239,11 @@ Menu_State::onUpdate() {
   
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Game Over state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 GameOver_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Space) {
@@ -264,7 +284,11 @@ GameOver_State::onUpdate() {
 
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Play state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 Play_State::handleInput(sf::Event event) {
 
@@ -420,7 +444,7 @@ Play_State::onRender(sf::RenderWindow* window) {
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
 
   for (auto unit : m_world.m_unitsInGame) {
-    window->draw(unit.m_actualFrame);
+    
   }
 } 
 
@@ -431,7 +455,11 @@ Play_State::onUpdate() {
   
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Options state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 Options_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::P) {
@@ -478,7 +506,11 @@ Options_State::onUpdate() {
 
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Game Play state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 GamePlay_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
@@ -516,7 +548,11 @@ GamePlay_State::onUpdate() {
 
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Graphics state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool
 Graphics_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {
@@ -554,7 +590,11 @@ Graphics_State::onUpdate() {
 
 }
 
-/*******************************************************************************/
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * State.cpp Sound state
+ */
+ /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 bool 
 Sound_State::handleInput(sf::Event event) {
   if (event.key.code == sf::Keyboard::Escape) {

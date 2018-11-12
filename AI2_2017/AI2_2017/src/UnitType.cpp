@@ -18,23 +18,10 @@ mountData(void* data, int count, char** value, char** columns) {
   //Check if UnitType has defined any sprites inside
   if (atoi(value[6]) != 0) {
     //Load sprite info
+    std::string temp = value[7];
+    p->loadSprites(temp);
 
     //return 0;
-  }
-
-  //if it doesn't have anything inside, let's give him a default sprite
-
-  sf::Texture* defaultT = new sf::Texture();
-  if (defaultT->loadFromFile("resources/sprites/defaultSprite.jpg")) {
-    std::cout << "Couldn't even load default sprite... " << std::endl;
-    
-    p->m_textureVector.push_back(defaultT);
-
-    p->m_north.setTexture(*p->m_textureVector[0]);
-    p->m_south.setTexture(*p->m_textureVector[0]);
-    p->m_west.setTexture(*p->m_textureVector[0]);
-    p->m_northWest.setTexture(*p->m_textureVector[0]);
-    p->m_southWest.setTexture(*p->m_textureVector[0]);
   }
 
   return 0;
@@ -42,7 +29,31 @@ mountData(void* data, int count, char** value, char** columns) {
 
 void
 UnitType::loadSprites(std::string spriteName) {
+  std::istringstream buffer(spriteName);
+  
+  ANIM anim;
+  DIR dir;
+  
+  Rect temp;
+
+  int position = 0;
   //Here we would use the json file to reach the objects inside of it and set the textures
+  for (int i = 0; i < ANIM::NUM_ANIMS; ++i) {
+    
+    for (int j = 0; j < DIR::NUM_DIRS; ++j) {
+      
+      for (int k = 0 ; k < 15; ++k) {
+        std::string t;
+   
+        buffer >> this->m_anim.m_frame[i][j][k].position.x;
+        buffer >> this->m_anim.m_frame[i][j][k].position.y;
+        buffer >> this->m_anim.m_frame[i][j][k].size.x;
+        buffer >> this->m_anim.m_frame[i][j][k].size.y;
+        std::cout << this->m_anim.m_frame[i][j][k].position.x << std::endl;
+      }
+    }
+
+  }
 }
 
 

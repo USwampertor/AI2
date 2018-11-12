@@ -12,7 +12,15 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Utilities.h"
+#include "Animation.h"
 
+ /**
+  * GameObject
+  * Description:
+  * 	The objects inside the game are children of this object
+  * Sample usage:
+  * 	
+  */
 class GameObject
 {
  public:

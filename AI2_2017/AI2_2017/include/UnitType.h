@@ -12,6 +12,7 @@
 #pragma once
 
 #include "Utilities.h"
+#include "Animation.h"
 
  /**
   * UnitType
@@ -38,17 +39,12 @@ class UnitType
       m_strength(other.m_strength),
       m_defense(other.m_defense),
       m_name(other.m_name),
-      m_north(other.m_north),
-      m_northWest(other.m_northWest),
-      m_west(other.m_west),
-      m_southWest(other.m_southWest),
-      m_south(other.m_south) {}
+      m_anim(other.m_anim) {}
 
   /**
    * Destructor
    */
   ~UnitType() {
-    m_textureVector.clear();
   };
 
   /**
@@ -102,22 +98,14 @@ class UnitType
    */
   int m_defense;
 
+  /**
+   * Set of all animations, which means frames, direction and action
+   */
+  Animation m_anim;
 
   /**
-   * Sprite resources
+   * Source Atlas
    */
-
-  sf::Sprite m_north;
-
-  sf::Sprite m_northWest;
-
-  sf::Sprite m_west;
-
-  sf::Sprite m_southWest;
-
-  sf::Sprite m_south;
-
-
-  std::vector<sf::Texture*> m_textureVector;
+  std::string m_source;
 };
 

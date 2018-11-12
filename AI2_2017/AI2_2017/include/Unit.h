@@ -12,9 +12,16 @@
 #include "GameObject.h"
 #include "UnitType.h"
 
+ /**
+  * Unit
+  * Description:
+  * 	A child of gameObject, is a simple being that lives inside our world
+  * Sample usage:
+  * 	Unit Update checks the state it should have right now
+  */
 class Unit : public GameObject
 {
- public:
+public:
   /**
    * Default Constructor
    */
@@ -30,30 +37,22 @@ class Unit : public GameObject
     m_speed = other.m_speed;
     m_strength = other.m_strength;
     m_defense = other.m_defense;
-    m_north = other.m_north;
-    m_northWest = other.m_northWest;
-    m_west = other.m_west;
-    m_southWest = other.m_southWest;
-    m_south = other.m_south;
-    m_actualFrame = m_south;
+    m_anim = other.m_anim;
+    m_actualFrame = m_anim.m_frame[IDLE][NORTH][0];
   };
 
   /**
    * Constructor based of a UnitType
    */
-  Unit(const UnitType& source) 
+  Unit(const UnitType& source)
     : m_name(source.m_name),
-      m_type(source.m_typeID),
-      m_hp(source.m_hp),
-      m_speed(source.m_speed),
-      m_strength(source.m_strength),
-      m_defense(source.m_defense),
-      m_north(source.m_north),
-      m_northWest(source.m_northWest),
-      m_west(source.m_west),
-      m_southWest(source.m_southWest),
-      m_south(source.m_south) {
-      m_actualFrame = m_south;
+    m_type(source.m_typeID),
+    m_hp(source.m_hp),
+    m_speed(source.m_speed),
+    m_strength(source.m_strength),
+    m_defense(source.m_defense),
+    m_anim(source.m_anim) {
+    m_actualFrame = m_anim.m_frame[IDLE][NORTH][0];
   };
 
   /**
@@ -73,7 +72,7 @@ class Unit : public GameObject
    *
    */
   void
-  setName(const char* name) {
+    setName(const char* name) {
     m_name = name;
   }
 
@@ -84,7 +83,7 @@ class Unit : public GameObject
    *
    */
   const char*
-  getName() {
+    getName() {
     return m_name.c_str();
   }
 
@@ -95,69 +94,77 @@ class Unit : public GameObject
    *
    */
   void
-  setType(int type) {
-    m_type = type;  
+    setType(int type) {
+    m_type = type;
   }
 
   /**
    * @brief returns the type of this unit
-   * @param 
+   * @param
    * @return the unit type
    *
    */
   const int
-  getType() {
+    getType() {
     return m_type;
   }
 
- private:
+private:
 
-   /**
-    * UnitType Name
-    */
-   std::string m_name;
-
-   /**
-    * unique ID from the database
-    */
-   int m_type;
-
-   /**
-    * standard health
-    */
-   int m_hp;
-
-   /**
-    * standard speed
-    */
-   int m_speed;
-
-   /**
-    * standard strength
-    */
-   int m_strength;
-
-   /**
-    * standard defense
-    */
-   int m_defense;
-
-   /**
-   * Sprite resources
+  /**
+   * UnitType Name
    */
+  std::string m_name;
 
-   sf::Sprite m_north;
+  /**
+   * unique ID from the database
+   */
+  int m_type;
 
-   sf::Sprite m_northWest;
+  /**
+   * standard health
+   */
+  int m_hp;
 
-   sf::Sprite m_west;
+  /**
+   * standard speed
+   */
+  int m_speed;
 
-   sf::Sprite m_southWest;
+  /**
+   * standard strength
+   */
+  int m_strength;
 
-   sf::Sprite m_south;
-   
+  /**
+   * standard defense
+   */
+  int m_defense;
+
+  /**
+  * Sprite resources
+  */
+  
+  /*****************************************************************************/
+  /*
+   * Animations are saved in a vector that saves them in sets by COORDINATES
+   * All vector of animations will have a size of 5 (north n-west west s-west south)
+   * or at least thats the intention, anyway, its a vector, you can expand it
+   */
+  /*****************************************************************************/
+
+  /*
+   * Set of all animations, which means frames, direction and action
+   */
+  Animation m_anim;
+
+  /**
+   * Checks if the frame should be flipped on X
+   */
+  bool m_flipped;
+
   public:
-   sf::Sprite m_actualFrame;
+    Rect m_actualFrame;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
