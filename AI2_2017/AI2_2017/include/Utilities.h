@@ -46,3 +46,20 @@ getTableSize(void* count, int argc, char** argv, char** azColName) {
   return 0;
 }
 
+template<>
+struct std::hash<std::string>
+{
+
+  int
+  operator()(std::string& path) const {
+    int hash;
+    std::string temp;
+    for (int i = 0; i < path.size(); ++i) {
+      int ascii = path[i];
+      ascii *= i + 1;
+      temp.append(std::to_string(ascii));
+    }
+    hash = atoi(temp.c_str());
+    return hash;
+  }
+};
