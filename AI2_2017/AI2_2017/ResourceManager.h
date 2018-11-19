@@ -40,8 +40,8 @@ public:
    * @return
    *
    */
-  void
-  loadFromFile();
+  std::shared_ptr<Resource>
+  loadFromFile(std::string path);
 
   /**
    * @brief Checks if there is any resource to destroy
