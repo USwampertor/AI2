@@ -449,7 +449,14 @@ Play_State::onRender(sf::RenderWindow* window) {
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
 
   for (auto unit : m_world.m_unitsInGame) {
-    
+    sf::Sprite t;
+    t.setTexture(unit.m_SpriteResource->m_texture);
+    t.setTextureRect(sf::IntRect(unit.m_actualFrame.position.x,
+                                 unit.m_actualFrame.position.y,
+                                 unit.m_actualFrame.size.x,
+                                 unit.m_actualFrame.size.y));
+
+    window->draw(t);
   }
 } 
 
@@ -457,7 +464,9 @@ void
 Play_State::onUpdate() {
   m_mousePosition = sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow);
 
-  
+  for (auto unit : m_world.m_unitsInGame) {
+    unit.update();
+  }
 }
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

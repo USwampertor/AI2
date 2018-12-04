@@ -68,15 +68,46 @@ public:
   ~Unit() {};
 
   /**
+   * @brief Initializes the objects inside of it
+   * @param 
+   * @return if able to generate
+   *
+   */
+  bool
+  initialize();
+
+  /**
+   * @brief checks for inputs ir if it has to update something inside of it
+   * @param 
+   * @return 
+   *
+   */
+  void
+  update();
+
+  /**
+   * @brief sets the current state of the machine
+   * @param 
+   * @return 
+   *
+   */
+  void
+  setState(UnitState* state);
+
+  /**
+   * Deletes and sends the garbage disposal
+   */
+  void
+  finish();
+
+  /**
    * @brief sets the name of the unit
    * @param const char* name of unit
    * @return
    *
    */
   void
-    setName(const char* name) {
-    m_name = name;
-  }
+  setName(const char* name);
 
   /**
    * @brief gets the name of the unit
@@ -85,9 +116,7 @@ public:
    *
    */
   const char*
-    getName() {
-    return m_name.c_str();
-  }
+  getName();
 
   /**
    * @brief sets the type of the unit
@@ -96,9 +125,7 @@ public:
    *
    */
   void
-    setType(int type) {
-    m_type = type;
-  }
+  setType(int type);
 
   /**
    * @brief returns the type of this unit
@@ -107,9 +134,7 @@ public:
    *
    */
   const int
-    getType() {
-    return m_type;
-  }
+  getType();
 
 private:
 
@@ -176,7 +201,20 @@ private:
    */
   std::shared_ptr<Texture> m_SpriteResource;
 
+  /**
+   * current state
+   */
   UnitState* m_currentState;
+
+  /**
+   * the clock for getting delta times
+   */
+  sf::Clock m_clock;
+
+  /**
+   * The delta time receiver
+   */
+  sf::Time m_deltaTime;
 
   /**
    * Static states for the FSM
@@ -185,7 +223,7 @@ private:
   /**
    * Idle state
    */
-  Idle_State* m_idleS;
+  Idle_State*   m_idleS;
 
   /**
    * Attack state
@@ -195,12 +233,12 @@ private:
   /**
    * Run state
    */
-  Run_State* m_runS;
+  Run_State*    m_runS;
 
   /**
    * Dead state
    */
-  Dead_State* m_deadS;
+  Dead_State*   m_deadS;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

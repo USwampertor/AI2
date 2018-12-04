@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include "Animation.h"
 #include "Utilities.h"
 #include "Vector2.h"
 
@@ -78,7 +79,8 @@ public:
   virtual bool 
   handleInput(sf::Event event) = 0;
 
-
+  virtual ANIM
+  getANIM() = 0;
   /**
    * Member declaration
    */
@@ -90,16 +92,6 @@ public:
    Unit* m_owner;
 
    /**
-    * the clock for getting delta times
-    */
-   sf::Clock m_clock;
-
-   /**
-    * The delta time receiver
-    */
-   sf::Time m_deltaTime;
-
-   /**
     * Controls the actual frame that has to render
     */
    int m_actualFrame;
@@ -107,7 +99,17 @@ public:
    /**
     * Controls the amount of time during 1 second
     */
-   int m_storedTime;
+   float m_storedTime;
+
+   /**
+    * ANIMATION STATE
+    */
+   ANIM m_animType;
+
+   /**
+    * ORIENTATION STATE
+    */
+   DIR m_direction;
 };
 
 class Idle_State : public UnitState
@@ -117,18 +119,20 @@ class Idle_State : public UnitState
   void
   onEntry();
 
-   void
+  void
   onExit();
 
-   bool
+  bool
   onUpdate(sf::Event event);
 
-   void
+ void
   update();
 
-   bool
+  bool
   handleInput(sf::Event event);
 
+  ANIM
+  getANIM();
 };
 
 class Attack_State : public UnitState
@@ -150,6 +154,8 @@ public:
   bool
   handleInput(sf::Event event);
 
+  ANIM
+  getANIM();
 };
 
 class Run_State : public UnitState
@@ -171,6 +177,8 @@ public:
   bool
   handleInput(sf::Event event);
 
+  ANIM
+  getANIM();
 };
 
 class Dead_State : public UnitState
@@ -192,4 +200,6 @@ public:
   bool
   handleInput(sf::Event event);
 
+  ANIM
+  getANIM();
 };

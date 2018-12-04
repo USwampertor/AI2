@@ -1,5 +1,80 @@
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * @file Unit.cpp
+ * @author Marco "Swampy" Millan
+ * @date 2018/12/04 2018
+ * @brief Unit member definition
+ * 
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 #include "Unit.h"
 
+bool
+Unit::initialize() {
+  m_idleS   = new Idle_State();
+  m_attackS = new Attack_State();
+  m_runS    = new Run_State();
+  m_deadS   = new Dead_State();
+  m_clock.restart();
+  m_currentState = nullptr;
+  setState(m_idleS);
+  m_currentState->m_actualFrame = 0;
+  m_currentState->m_owner;
+  m_currentState->m_storedTime = 0.0f;
+  return true;
+}
+
+void
+Unit::update() {
+  m_deltaTime = m_clock.restart();
+  m_currentState->m_storedTime += m_deltaTime.asMilliseconds();
+
+  //Changes the frame to the next one
+  if (m_currentState->m_storedTime > (1000 / MAXFRAMES)) {
+    ++m_currentState->m_actualFrame;
+    m_actualFrame = m_anim.m_frame[m_currentState->getANIM()][0][m_currentState->m_actualFrame];
+    m_currentState->m_storedTime - (1000 / MAXFRAMES);
+    if (m_currentState->m_actualFrame > MAXFRAMES) { m_currentState->m_actualFrame = 0; }
+  }
+}
+
+void
+Unit::setState(UnitState* state) {
+
+}
+
+void
+Unit::finish() {
+
+}
+
+void
+Unit::setName(const char* name) {
+  m_name = name;
+}
+
+const char*
+Unit::getName() {
+  return m_name.c_str();
+}
+
+void
+Unit::setType(int type) {
+  m_type = type;
+}
+
+const int
+Unit::getType() {
+  return m_type;
+}
+
+
+
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
+/**
+ * Unit.cpp Lua function definition
+ */
+/*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 
 int
 createUnit(lua_State* L) {

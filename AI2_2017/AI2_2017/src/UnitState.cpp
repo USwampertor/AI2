@@ -29,6 +29,7 @@ Idle_State::onExit() {
 
 bool
 Idle_State::onUpdate(sf::Event event) {
+  return true;
 
 }
 
@@ -39,7 +40,13 @@ Idle_State::update() {
 
 bool
 Idle_State::handleInput(sf::Event event) {
+  return true;
 
+}
+
+ANIM
+Idle_State::getANIM() {
+  return ANIM::IDLE;
 }
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
@@ -60,6 +67,7 @@ Attack_State::onExit() {
 
 bool
 Attack_State::onUpdate(sf::Event event) {
+  return true;
 
 }
 
@@ -70,7 +78,13 @@ Attack_State::update() {
 
 bool
 Attack_State::handleInput(sf::Event event) {
+  return true;
 
+}
+
+ANIM
+Attack_State::getANIM() {
+  return ANIM::ATTACK;
 }
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
@@ -91,6 +105,7 @@ Run_State::onExit() {
 
 bool
 Run_State::onUpdate(sf::Event event) {
+  return true;
 
 }
 
@@ -101,10 +116,14 @@ Run_State::update() {
 
 bool
 Run_State::handleInput(sf::Event event) {
+  return true;
 
 }
 
-
+ANIM
+Run_State::getANIM() {
+  return ANIM::RUN;
+}
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 /**
  * UnitState.cpp DEAD STATE
@@ -123,6 +142,7 @@ Dead_State::onExit() {
 
 bool
 Dead_State::onUpdate(sf::Event event) {
+  return true;
 
 }
 
@@ -133,5 +153,10 @@ Dead_State::update() {
 
 bool
 Dead_State::handleInput(sf::Event event) {
+  return true;
+}
 
+ANIM
+Dead_State::getANIM() {
+  return ANIM::DEAD;
 }
