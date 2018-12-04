@@ -194,27 +194,32 @@ Menu_State::onEntry() {
   t->loadFromFile("resources/sprites/mainmap.jpg");
   m_map.setTexture(*t);
   m_map.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
-                                 m_map.getGlobalBounds().width / 2,
-                                 m_fsm->m_screen.m_mainWindow.getSize().y / 2 -
-                                 m_map.getGlobalBounds().height / 2));
-  
-  m_title.setFont(m_fsm->m_fontMap["old"]);
-  m_title.setString("RUNESTONE");
-  m_title.setOutlineThickness(2.0f);
-  m_title.setFillColor(sf::Color::Black);
-  m_title.setOutlineColor(sf::Color::White);
-  m_title.setCharacterSize(30);
-  m_title.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
-                                   m_title.getLocalBounds().width / 2,
-                                   m_fsm->m_screen.m_mainWindow.getSize().y / 2 -
-                                   m_title.getLocalBounds().height / 2 ));
+    m_map.getGlobalBounds().width / 2,
+    m_fsm->m_screen.m_mainWindow.getSize().y / 2 -
+    m_map.getGlobalBounds().height / 2));
 
-  m_play.m_text.setFont(m_fsm->m_fontMap["old"]);
-  m_play.m_text.setString("PLAY");
-  m_play.m_text.setOutlineThickness(2.0f);
-  m_play.m_text.setFillColor(sf::Color::Black);
-  m_play.m_text.setOutlineColor(sf::Color::Red);
-  m_play.m_text.setCharacterSize(30);
+  m_title.m_font = 
+    std::static_pointer_cast<Font>(m_fsm->m_resourceManager.loadFromFile(RESOURCETYPE::FONT,
+                                                            "resources/fonts/BCastle.ttf"));
+  m_title.m_text.setFont(m_title.m_font->m_font);
+  m_title.m_text.setCharacterSize(30);
+  m_title.m_text.setString("RUNESTONE");
+  m_title.m_text.setOutlineThickness(2.0f);
+  m_title.m_text.setFillColor(sf::Color::Black);
+  m_title.m_text.setOutlineColor(sf::Color::White);
+  m_title.m_text.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
+                                          m_title.m_text.getLocalBounds().width / 2,
+                                          m_fsm->m_screen.m_mainWindow.getSize().y / 2 -
+                                          m_title.m_text.getLocalBounds().height / 2 ));
+  m_play.m_text.m_font = 
+    std::static_pointer_cast<Font>(m_fsm->m_resourceManager.loadFromFile(RESOURCETYPE::FONT,
+                                                            "resources/fonts/BCastle.ttf"));
+  m_play.m_text.m_text.setFont(m_play.m_text.m_font->m_font);
+  m_play.m_text.m_text.setCharacterSize(30);
+  m_play.m_text.m_text.setString("PLAY");
+  m_play.m_text.m_text.setOutlineThickness(2.0f);
+  m_play.m_text.m_text.setFillColor(sf::Color::Black);
+  m_play.m_text.m_text.setOutlineColor(sf::Color::Red);
   m_play.setSize(100.0f, 100.0f);
   m_play.setSprite("resources/sprites/startButton.png");
   m_play.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
@@ -230,7 +235,7 @@ Menu_State::onExit() {
 void
 Menu_State::onRender(sf::RenderWindow* window) {
   window->draw(m_map);
-  window->draw(m_title);
+  window->draw(m_title.m_text);
   m_play.draw(window);
 }
 
@@ -398,7 +403,7 @@ Play_State::onEntry() {
   m_ID = 5;
 
   m_world.initialization();
-
+  m_world.m_resourceManager = &m_fsm->m_resourceManager;
   //Only for testing
   sf::Texture* t = new sf::Texture();
   t->loadFromFile("resources/sprites/minecraft.jpg");

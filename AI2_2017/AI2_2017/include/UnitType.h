@@ -11,9 +11,9 @@
 
 #pragma once
 
-#include "Utilities.h"
 #include "Animation.h"
-
+#include "Resource.h"
+#include "Utilities.h"
  /**
   * UnitType
   * Description:

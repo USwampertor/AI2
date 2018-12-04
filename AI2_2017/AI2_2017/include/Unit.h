@@ -10,8 +10,9 @@
 
 #pragma once
 #include "GameObject.h"
+#include "Resource.h"
+#include "UnitState.h"
 #include "UnitType.h"
-
  /**
   * Unit
   * Description:
@@ -39,6 +40,7 @@ public:
     m_defense = other.m_defense;
     m_anim = other.m_anim;
     m_actualFrame = m_anim.m_frame[IDLE][NORTH][0];
+    m_SpriteResource = other.m_SpriteResource;
   };
 
   /**
@@ -163,8 +165,42 @@ private:
    */
   bool m_flipped;
 
-  public:
-    Rect m_actualFrame;
+ public:
+  /**
+   * Specific frame running
+   */
+  Rect m_actualFrame;
+
+  /**
+   * resource where the sprite is getting the frames
+   */
+  std::shared_ptr<Texture> m_SpriteResource;
+
+  UnitState* m_currentState;
+
+  /**
+   * Static states for the FSM
+   */
+
+  /**
+   * Idle state
+   */
+  Idle_State* m_idleS;
+
+  /**
+   * Attack state
+   */
+  Attack_State* m_attackS;
+
+  /**
+   * Run state
+   */
+  Run_State* m_runS;
+
+  /**
+   * Dead state
+   */
+  Dead_State* m_deadS;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

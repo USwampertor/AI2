@@ -10,39 +10,60 @@
 
 #include "App.h"
 
+using std::static_pointer_cast;
+
 bool
 App::onEntry() {
   
-  sf::Font font;
-  if (!font.loadFromFile("resources/fonts/arial.ttf")) {
-    std::cout << "Failed to create default font from file...\n";
-    return false;
-  }
-  m_fontMap.insert(std::make_pair("default", font));
+  //OLD FONT MAP
+  //sf::Font font;
+  //if (!font.loadFromFile("resources/fonts/arial.ttf")) {
+  //  std::cout << "Failed to create default font from file...\n";
+  //  return false;
+  //}
+  //m_fontMap.insert(std::make_pair("default", font));
+  //
+  //if (!font.loadFromFile("resources/fonts/Aurebesh.otf")) {
+  //  std::cout << "Failed to create default font from file...\n";
+  //  return false;
+  //}
+  //m_fontMap.insert(std::make_pair("aurebesh", font));
+  //
+  //if (!font.loadFromFile("resources/fonts/PGB.ttf")) {
+  //  std::cout << "Failed to create default font from file...\n";
+  //  return false;
+  //}
+  //m_fontMap.insert(std::make_pair("pokemon", font));
+  //
+  //if (!font.loadFromFile("resources/fonts/HaraldRunic.ttf")) {
+  //  std::cout << "Failed to create default font from file...\n";
+  //  return false;
+  //}
+  //m_fontMap.insert(std::make_pair("runic", font));
+  //
+  //if (!font.loadFromFile("resources/fonts/BCastle.ttf")) {
+  //  std::cout << "Failed to create default font from file...\n";
+  //  return false;
+  //}
+  //m_fontMap.insert(std::make_pair("old", font));
+  //END OF OLD FONT MAP
 
-  if (!font.loadFromFile("resources/fonts/Aurebesh.otf")) {
-    std::cout << "Failed to create default font from file...\n";
-    return false;
-  }
-  m_fontMap.insert(std::make_pair("aurebesh", font));
+  //NEW FONT REGISTRATION IN RESOURCE MANAGER
 
-  if (!font.loadFromFile("resources/fonts/PGB.ttf")) {
-    std::cout << "Failed to create default font from file...\n";
-    return false;
-  }
-  m_fontMap.insert(std::make_pair("pokemon", font));
+  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/Aurebesh.otf")) {
+  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/Aurebesh.otf");
+  //}
+  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/PGB.ttf")) {
+  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/PGB.ttf");
+  //}
+  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/HaraldRunic.ttf")) {
+  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/HaraldRunic.ttf");
+  //}
+  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/BCastle.ttf")) {
+  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/BCastle.ttf");
+  //}
+  //END OF NEW FONT REGISTRATION IN RESOURCE MANAGER
 
-  if (!font.loadFromFile("resources/fonts/HaraldRunic.ttf")) {
-    std::cout << "Failed to create default font from file...\n";
-    return false;
-  }
-  m_fontMap.insert(std::make_pair("runic", font));
-
-  if (!font.loadFromFile("resources/fonts/BCastle.ttf")) {
-    std::cout << "Failed to create default font from file...\n";
-    return false;
-  }
-  m_fontMap.insert(std::make_pair("old", font));
 
   m_logoS = new Logo_State();
   m_playS = new Play_State();
@@ -57,8 +78,15 @@ App::onEntry() {
   
   m_currentState = nullptr; 
   m_screen.createWindow();
+  
+  m_screen.m_defaultFont = 
+    static_pointer_cast<Font>(m_resourceManager.loadFromFile(RESOURCETYPE::FONT,
+                                                "resources/fonts/Aurebesh.otf"));
+
+  //static_pointer_cast<Font>(m_resourceManager.loadFromFile(RESOURCETYPE::FONT,
+  //                          "resources/fonts/Aurebesh.otf"));
   m_screen.m_testText.setString("TEST STRING");
-  m_screen.m_testText.setFont(m_fontMap["aurebesh"]);
+  m_screen.m_testText.setFont(m_screen.m_defaultFont->m_font);
   m_screen.m_testText.setPosition(0.0f, 0.0f);
   m_screen.m_testText.setCharacterSize(10);
   m_screen.m_testText.setFillColor(sf::Color::White);
@@ -80,7 +108,10 @@ App::onUpdate() {
       return;
       }
       if (event.type == sf::Event::Resized) {
-        sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+        sf::FloatRect visibleArea(0, 
+                                  0, 
+                                  static_cast<float>(event.size.width), 
+                                  static_cast<float>(event.size.height));
         m_screen.m_mainWindow.setView(sf::View(visibleArea));
       }
       if (!m_currentState->onInputUpdate(event)) {

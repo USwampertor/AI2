@@ -9,7 +9,9 @@
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 
 #pragma once
+#include "Resource.h"
 #include "Utilities.h"
+#include "Text.h"
 
 /**
 * TextBox
@@ -120,7 +122,7 @@ class TextBox
   /**
    * SFML text output to show user input
    */
-   sf::Text m_text;
+   Text m_text;
 
   /**
    * SFML text box as boundary for the text

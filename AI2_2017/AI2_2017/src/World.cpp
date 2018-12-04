@@ -59,7 +59,9 @@ World::createUnit(int id, Vector2 position) {
   Unit u(*getUnitType(id));
   u.setID(id_Creator);
   u.setPosition(position);
- 
+  u.m_SpriteResource = 
+    std::static_pointer_cast<Texture>(m_resourceManager->loadFromFile(RESOURCETYPE::FONT,
+                                                         getUnitType(id)->m_source));
   m_unitsInGame.push_back(u);
 
   ++id_Creator;

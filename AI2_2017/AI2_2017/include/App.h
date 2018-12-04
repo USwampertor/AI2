@@ -11,6 +11,7 @@
 
 #include "State.h"
 #include "Screen.h"
+#include "ResourceManager.h"
 
 /**
 * Description:
@@ -29,7 +30,7 @@ class App
   /**
    * Default destructor
    */
-  ~App() {};
+  ~App() {}
   
   /**
    * Sets up variables, initializes data ,etc
@@ -65,17 +66,12 @@ class App
   /**
    * Default Font for testing
    */
-  sf::Font m_defaultFont;
+  std::shared_ptr<Font> m_defaultFont;
 
   /**
    * State stack that checks the order of objects
    */
   std::stack<State*> m_stateStack;
-
-  /**
-   * the font map to access all fonts
-   */
-  std::map<std::string, sf::Font> m_fontMap;
 
   /**
    * the pointer to the current state the machine is
@@ -86,6 +82,11 @@ class App
    * The graphics API wrapped in this thing
    */
   Screen m_screen;
+
+  /**
+   * The resource manager of the application
+   */
+  ResourceManager m_resourceManager;
 
   /**
    * all states possibles for this FSM

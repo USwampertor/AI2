@@ -10,7 +10,7 @@
 
 #pragma once
 #include "Rect.h"
-
+#define MAXFRAMES 10
 /**
  * The action of the unit
  */
@@ -19,7 +19,7 @@ enum ANIM {
   RUN,
   ATTACK,
   DEAD,
-  NUM_ANIMS = 5
+  NUM_ANIMS = 4
 };
 
 /**
@@ -42,5 +42,5 @@ enum DIR {
  */
 struct Animation
 {
-  Rect m_frame[NUM_ANIMS][NUM_DIRS][15];
+  Rect m_frame[NUM_ANIMS][NUM_DIRS][MAXFRAMES];
 };

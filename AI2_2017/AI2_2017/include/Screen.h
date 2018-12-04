@@ -11,7 +11,7 @@
 
 
 #include <iostream>
-
+#include "Resource.h"
 #include "Utilities.h"
 
 //forward declaration
@@ -63,7 +63,7 @@ class Screen
    */
   void 
   CheckState(State* s);
-  
+
   /**
    * Member declaration
    */
@@ -75,6 +75,14 @@ class Screen
    */
   sf::RenderWindow m_mainWindow;
   
+  /**
+   * test text for testing purposes
+   */
   sf::Text m_testText;
+
+  /**
+   * Default shared resource font
+   */
+  std::shared_ptr<Font> m_defaultFont;
 };
 

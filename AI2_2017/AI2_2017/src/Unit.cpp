@@ -68,8 +68,6 @@ unitSetType(lua_State* L) {
   return 1;
 }
 
-
-
 void
 registerUnit(lua_State* L) {
   luaL_Reg unitRegs[] = {

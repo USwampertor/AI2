@@ -10,21 +10,22 @@
 
 #pragma once
 
+#include "Button.h"
+#include "Resource.h"
+#include "Textbox.h"
 #include "Utilities.h"
 #include "World.h"
-#include "Button.h"
-#include "Textbox.h"
+
 //forward declaration
 class App;
 
-
 /**
-* State
-* Description:
-*   The states of the App FSM
-* Sample usage:
-* 	state menu brings the menu to the player
-*/
+ * State
+ * Description:
+ *   The states of the App FSM
+ * Sample usage:
+ * 	state menu brings the menu to the player
+ */
 class State 
 {
  public:
@@ -32,12 +33,12 @@ class State
   /**
    * Default constructor
    */
-  State() {m_fsm = nullptr; };
+  State() {m_fsm = nullptr; }
 
   /**
    * Virtual Destructor for inheritance
    */
-  virtual ~State() {};
+  virtual ~State() {}
 
   
   /**
@@ -329,7 +330,7 @@ class Menu_State : public State
   /**
    * title text
    */
-  sf::Text m_title;
+  Text m_title;
 
   /**
    * Play button
@@ -456,6 +457,8 @@ class Play_State : public State
    * World object with all the stuff from the game
    */
   World m_world;
+
+ 
 };
 
 class Options_State : public State 

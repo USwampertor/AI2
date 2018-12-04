@@ -8,11 +8,11 @@ mountData(void* data, int count, char** value, char** columns) {
   //LOad default data from the database to unitType
   UnitType* p = (UnitType*)data;
 
-  p->m_typeID = (unsigned int)value[0];
+  p->m_typeID = atoi(value[0]);
   p->m_name = value[1];
   p->m_hp = atoi(value[2]);
   p->m_speed = atoi(value[3]);
-  p->m_strength = atoi(value[4]);
+  p->m_strength = atoi(value[4]);  
   p->m_defense = atoi(value[5]);
 
   //Check if UnitType has defined any sprites inside
@@ -20,7 +20,7 @@ mountData(void* data, int count, char** value, char** columns) {
     //Load sprite info
     std::string temp = value[7];
     p->loadSprites(temp);
-
+    p->m_source = value[8];
     //return 0;
   }
 
@@ -40,9 +40,10 @@ UnitType::loadSprites(std::string spriteName) {
   //Here we would use the json file to reach the objects inside of it and set the textures
   for (int i = 0; i < ANIM::NUM_ANIMS; ++i) {
     
+    std::cout << "ANIMATION BATCH " << i << std::endl;
     for (int j = 0; j < DIR::NUM_DIRS; ++j) {
-      
-      for (int k = 0 ; k < 15; ++k) {
+      std::cout << "DIRECTION BATCH" << j << std::endl;
+      for (int k = 0 ; k < 10; ++k) {
         std::string t;
    
         buffer >> this->m_anim.m_frame[i][j][k].position.x;

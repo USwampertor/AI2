@@ -12,6 +12,7 @@
 
 #include "ItemType.h"
 #include "Tile.h"
+#include "ResourceManager.h"
 #include "Unit.h"
 #include "UnitType.h"
 #include "Utilities.h"
@@ -74,6 +75,10 @@ public:
    */
   int id_Creator;
 
+  /**
+   * Resource manager from the game
+   */
+  ResourceManager* m_resourceManager;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

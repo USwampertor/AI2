@@ -17,19 +17,20 @@ TextBox::operator = (const TextBox& other) const {
 
 void
 TextBox::setData(std::string userData) {
-  m_text.setString(userData);
+  m_text.m_text.setString(userData);
 }
 
 void
 TextBox::setPosition(float x, float y) {
   m_box.setPosition(x, y);
-  m_text.setPosition(x + m_box.getSize().x / 3.0f, y + m_box.getSize().y / 3.0f);
+  m_text.m_text.setPosition(x + m_box.getSize().x / 3.0f, 
+                            y + m_box.getSize().y / 3.0f);
 }
 
 void
 TextBox::setPosition(sf::Vector2f position) {
   m_box.setPosition(position);
-  m_text.setPosition(position.x, position.y + m_box.getSize().y / 3.0f);
+  m_text.m_text.setPosition(position.x, position.y + m_box.getSize().y / 3.0f);
 }
 
 void
@@ -64,5 +65,5 @@ TextBox::CheckClick(sf::Vector2i mousePos) {
 void
 TextBox::draw(sf::RenderWindow* window) {
   window->draw(m_box);
-  window->draw(m_text);
+  window->draw(m_text.m_text);
 }
