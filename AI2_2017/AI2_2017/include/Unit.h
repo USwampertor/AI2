@@ -83,7 +83,14 @@ public:
    *
    */
   void
-  update();
+  update(float deltaTime);
+
+
+  /**
+   * Updates the orientation of the unit
+   */
+  DIR
+  orientation();
 
   /**
    * @brief sets the current state of the machine
@@ -136,7 +143,7 @@ public:
   const int
   getType();
 
-private:
+public:
 
   /**
    * UnitType Name
@@ -169,9 +176,29 @@ private:
   int m_defense;
 
   /**
-  * Sprite resources
-  */
-  
+   * How much time has it passed in the current state
+   */
+  float m_timeInState;
+
+  /**
+   * The direction the object is facing
+   */
+  Vector2 m_orientation;
+
+  /**
+   * resource where the sprite is getting the frames
+   */
+  std::shared_ptr<Texture> m_SpriteResource;
+
+  /**
+   * The delta time receiver
+   */
+  sf::Time m_deltaTime;
+
+  /**
+   * Static states for the FSM
+   */
+
   /*****************************************************************************/
   /*
    * Animations are saved in a vector that saves them in sets by COORDINATES
@@ -186,20 +213,9 @@ private:
   Animation m_anim;
 
   /**
-   * Checks if the frame should be flipped on X
-   */
-  bool m_flipped;
-
- public:
-  /**
    * Specific frame running
    */
-  Rect m_actualFrame;
-
-  /**
-   * resource where the sprite is getting the frames
-   */
-  std::shared_ptr<Texture> m_SpriteResource;
+  Frame m_actualFrame;
 
   /**
    * current state
@@ -207,18 +223,9 @@ private:
   UnitState* m_currentState;
 
   /**
-   * the clock for getting delta times
+   * State stack
    */
-  sf::Clock m_clock;
-
-  /**
-   * The delta time receiver
-   */
-  sf::Time m_deltaTime;
-
-  /**
-   * Static states for the FSM
-   */
+  std::stack<UnitState*> m_stateStack;
 
   /**
    * Idle state

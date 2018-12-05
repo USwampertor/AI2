@@ -222,9 +222,9 @@ Menu_State::onEntry() {
   m_play.m_text.m_text.setOutlineColor(sf::Color::Red);
   m_play.setSize(100.0f, 100.0f);
   m_play.setSprite("resources/sprites/startButton.png");
-  m_play.setPosition(sf::Vector2f(m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
-                                  m_play.m_box.getLocalBounds().width / 2,
-                                  m_fsm->m_screen.m_mainWindow.getSize().y / 2));
+  m_play.setPosition(sf::Vector2f((float)m_fsm->m_screen.m_mainWindow.getSize().x / 2 -
+                                  (float)m_play.m_box.getLocalBounds().width / 2,
+                                  (float)m_fsm->m_screen.m_mainWindow.getSize().y / 2));
 
 }
 
@@ -333,9 +333,9 @@ Play_State::handleInput(sf::Event event) {
       m_mainCamera.move(-10.0f, 0);
     }
 
-    if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x > 
+    if ((unsigned int)sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x > 
         m_fsm->m_screen.m_mainWindow.getSize().x - 20 &&
-        sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x <
+        (unsigned int)sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).x <
         m_fsm->m_screen.m_mainWindow.getSize().x) {
       
       sf::Mouse::setPosition(sf::Vector2i(m_fsm->m_screen.m_mainWindow.getSize().x - 20,
@@ -354,9 +354,9 @@ Play_State::handleInput(sf::Event event) {
       m_mainCamera.move(0.0f, -10.0f);
     }
 
-    if (sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y >
+    if ((unsigned int)sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y >
         m_fsm->m_screen.m_mainWindow.getSize().y - 20 &&
-        sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y <
+        (unsigned int)sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow).y <
         m_fsm->m_screen.m_mainWindow.getSize().y) {
 
       sf::Mouse::setPosition(sf::Vector2i(m_mousePosition.x,
@@ -441,31 +441,30 @@ Play_State::onExit() {
 void
 Play_State::onRender(sf::RenderWindow* window) {
   
-  window->draw(m_testMap);
+  //window->draw(m_testMap);
 
-  m_fsm->m_screen.m_mainWindow.setView(m_miniMapCamera);
-  window->draw(m_testMap);
-
-  m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
 
   for (auto unit : m_world.m_unitsInGame) {
     sf::Sprite t;
-    t.setTexture(unit.m_SpriteResource->m_texture);
-    t.setTextureRect(sf::IntRect(unit.m_actualFrame.position.x,
-                                 unit.m_actualFrame.position.y,
-                                 unit.m_actualFrame.size.x,
-                                 unit.m_actualFrame.size.y));
-
+    t.setTexture(unit->m_SpriteResource->m_texture);
+    t.setTextureRect(sf::IntRect((int)unit->m_actualFrame.position.x,
+                                 (int)unit->m_actualFrame.position.y,
+                                 (int)unit->m_actualFrame.size.x,
+                                 (int)unit->m_actualFrame.size.y));
+    
+    if (unit->m_actualFrame.m_flipped) { t.scale(-1,1); }
     window->draw(t);
   }
+  m_fsm->m_screen.m_mainWindow.setView(m_miniMapCamera);
+  window->draw(m_testMap);
+  m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
 } 
 
 void
 Play_State::onUpdate() {
   m_mousePosition = sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow);
-
-  for (auto unit : m_world.m_unitsInGame) {
-    unit.update();
+  for (unsigned int i = 0; i < m_world.m_unitsInGame.size(); ++i) {
+    m_world.m_unitsInGame[i]->update(m_time.restart().asSeconds());
   }
 }
 

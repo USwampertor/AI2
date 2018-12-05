@@ -15,32 +15,102 @@ Unit::initialize() {
   m_attackS = new Attack_State();
   m_runS    = new Run_State();
   m_deadS   = new Dead_State();
-  m_clock.restart();
+  m_orientation = { 1 , 0 };
   m_currentState = nullptr;
   setState(m_idleS);
-  m_currentState->m_actualFrame = 0;
-  m_currentState->m_owner;
-  m_currentState->m_storedTime = 0.0f;
+  
   return true;
 }
 
-void
-Unit::update() {
-  m_deltaTime = m_clock.restart();
-  m_currentState->m_storedTime += m_deltaTime.asMilliseconds();
+DIR
+Unit::orientation() {
+  float angle = (float)std::atan(m_orientation.y / m_orientation.x) * 3.14159 / 180;
+  //Looking Right
 
-  //Changes the frame to the next one
-  if (m_currentState->m_storedTime > (1000 / MAXFRAMES)) {
-    ++m_currentState->m_actualFrame;
-    m_actualFrame = m_anim.m_frame[m_currentState->getANIM()][0][m_currentState->m_actualFrame];
-    m_currentState->m_storedTime - (1000 / MAXFRAMES);
-    if (m_currentState->m_actualFrame > MAXFRAMES) { m_currentState->m_actualFrame = 0; }
+  if (angle < 67.5f && angle > 22.5f) {
+    m_actualFrame.m_flipped = false;
+    return DIR::NEAST;
   }
+
+  if (angle < 112.5f  && angle > 67.5f) {
+    m_actualFrame.m_flipped = false;
+    return DIR::NORTH;
+  }
+
+  if (angle < 157.5f && angle > 112.5f) {
+    m_actualFrame.m_flipped = false;
+    return DIR::NWEST;
+  }
+
+  if (angle < 202.5f && angle > 157.5f) {
+    m_actualFrame.m_flipped = false;
+    return DIR::WEST;
+  }
+
+  if (angle < 247.5f && angle > 202.5f) {
+    m_actualFrame.m_flipped = false;
+    return DIR::SWEST;
+  }
+
+  if (angle < 292.5f && angle > 247.5f) {
+    m_actualFrame.m_flipped = true;
+    return DIR::SOUTH;
+  }
+
+  if (angle < 337.5F && angle > 292.5f) {
+    m_actualFrame.m_flipped = true;
+    return DIR::SEAST;
+  }
+
+  m_actualFrame.m_flipped = true;
+  return DIR::EAST;
+}
+
+void
+Unit::update(float deltaTime) {
+  m_timeInState += deltaTime;
+
+  float AnimDuration = 0.75f;
+  float numFrames = 10.0f;
+  float rate = AnimDuration / numFrames;
+
+  float modTA = std::fmodf(m_timeInState, AnimDuration);
+  int actualFrame = (int)((float)(modTA / rate));
+  m_actualFrame = m_anim.m_frame[m_currentState->getANIM()][orientation()][actualFrame];
+
 }
 
 void
 Unit::setState(UnitState* state) {
+  if (state == nullptr) {
+    if (!m_stateStack.empty()) {
+      m_stateStack.pop();
+      //delete (m_currentState);
+      m_currentState = m_stateStack.top();
+      m_currentState->onEntry();
+    }
 
+    else {
+      m_currentState = nullptr;
+    }
+  }
+
+  else if (m_currentState != nullptr) {
+    //m_stateStack.pop();
+    state->m_owner = this;
+    m_stateStack.push(state);
+    m_currentState->onExit();
+    m_currentState = m_stateStack.top();
+    m_currentState->onEntry();
+    m_timeInState = 0;
+  }
+
+  else {
+    state->m_owner = this;
+    m_stateStack.push(state);
+    m_currentState = m_stateStack.top();
+    m_currentState->onEntry();
+  }
 }
 
 void

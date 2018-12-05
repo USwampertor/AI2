@@ -79,6 +79,9 @@ public:
   virtual bool 
   handleInput(sf::Event event) = 0;
 
+  /**
+   * Gets the state in ANIM
+   */
   virtual ANIM
   getANIM() = 0;
   /**
@@ -90,16 +93,6 @@ public:
     * The owner of the unit
     */
    Unit* m_owner;
-
-   /**
-    * Controls the actual frame that has to render
-    */
-   int m_actualFrame;
-
-   /**
-    * Controls the amount of time during 1 second
-    */
-   float m_storedTime;
 
    /**
     * ANIMATION STATE

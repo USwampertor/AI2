@@ -29,13 +29,15 @@ Idle_State::onExit() {
 
 bool
 Idle_State::onUpdate(sf::Event event) {
+  
+  
+  
   return true;
 
 }
 
 void
 Idle_State::update() {
-
 }
 
 bool

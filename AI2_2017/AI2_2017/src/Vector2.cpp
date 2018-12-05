@@ -156,29 +156,38 @@ Vector2::operator/=(float scale) {
   return *this;
 }
 
- float
+float
 Vector2::dot(const Vector2& a, const Vector2& b) {
   return a | b;
 }
 
- float
+float
 Vector2::cross(const Vector2& a, const Vector2& b) {
   return a ^ b;
 }
 
- float
+float
 Vector2::dotScale(const Vector2& a, const Vector2& b) {
   return (a | b) / a.magnitude();
 }
 
- float
+float
 Vector2::sqrDistance(const Vector2& a, const Vector2& b) {
   return std::pow(a.x - b.x, 2.0f) + std::pow(a.y - b.y, 2.0f);
 }
 
- float
+float
 Vector2::distance(const Vector2& a, const Vector2& b) {
   return std::sqrt(sqr(a.x + b.x) + sqr(a.y + b.y));
+}
+
+Vector2
+Vector2::rotate(float angle) {
+  float rad = angle * 180.0f / 3.14159f;
+  Vector2 temp = *this;
+  temp.x = x * std::cos(rad) - y * std::sin(rad);
+  temp.y = x * std::sin(rad) + y * std::cos(rad);
+  return temp;
 }
 
 void

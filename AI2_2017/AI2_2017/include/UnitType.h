@@ -34,6 +34,7 @@ class UnitType
    */
   UnitType(const UnitType& other)
     : m_typeID(other.m_typeID),
+      m_source(other.m_source),
       m_hp(other.m_hp),
       m_speed(other.m_speed),
       m_strength(other.m_strength),
@@ -74,6 +75,11 @@ class UnitType
   std::string m_name;
 
   /**
+   * Source Atlas
+   */
+  std::string m_source;
+
+  /**
    * unique ID from the database
    */
   unsigned int m_typeID;
@@ -102,10 +108,5 @@ class UnitType
    * Set of all animations, which means frames, direction and action
    */
   Animation m_anim;
-
-  /**
-   * Source Atlas
-   */
-  std::string m_source;
 };
 

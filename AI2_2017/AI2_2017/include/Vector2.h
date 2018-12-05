@@ -317,6 +317,15 @@ public:
   distance(const Vector2& a, const Vector2& b);
 
   /**
+   * @brief rotates the vector
+   * @param the value in angle
+   * @return the vector rotated
+   *
+   */
+  Vector2
+  rotate(float angle);
+
+  /**
    * @brief sets the value of a nauVector2
    * @param float x and y
    * @return

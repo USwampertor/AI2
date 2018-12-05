@@ -56,15 +56,14 @@ World::initialization() {
 void
 World::createUnit(int id, Vector2 position) {
   
-  Unit u(*getUnitType(id));
-  u.setID(id_Creator);
-  u.setPosition(position);
-  u.m_SpriteResource = 
-    std::static_pointer_cast<Texture>(m_resourceManager->loadFromFile(RESOURCETYPE::FONT,
+  Unit* u = new Unit(*getUnitType(id));
+  u->setID(id_Creator);
+  u->setPosition(position);
+  u->m_SpriteResource = 
+    std::static_pointer_cast<Texture>(m_resourceManager->loadFromFile(RESOURCETYPE::TEXTURE,
                                                          getUnitType(id)->m_source));
-  u.initialize();
+  u->initialize();
   m_unitsInGame.push_back(u);
-
   ++id_Creator;
 }
 

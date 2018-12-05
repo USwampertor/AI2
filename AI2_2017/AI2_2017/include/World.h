@@ -48,7 +48,7 @@ public:
   /**
    * the list of all units in-game
    */
-  std::vector<Unit> m_unitsInGame;
+  std::vector<Unit*> m_unitsInGame;
   
   /**
    * List of all unitTypes from data base
@@ -79,6 +79,11 @@ public:
    * Resource manager from the game
    */
   ResourceManager* m_resourceManager;
+
+  /**
+   * The object which we will be using to update things in the world
+   */
+  sf::Clock m_time;
 };
 
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/

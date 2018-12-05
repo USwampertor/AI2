@@ -9,7 +9,7 @@
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 
 #pragma once
-#include "Rect.h"
+#include "Frame.h"
 #define MAXFRAMES 10
 /**
  * The action of the unit
@@ -42,5 +42,6 @@ enum DIR {
  */
 struct Animation
 {
-  Rect m_frame[NUM_ANIMS][NUM_DIRS][MAXFRAMES];
+  std::vector< std::vector< std::vector< Frame > > > m_frame;
+  //Frame m_frame[NUM_ANIMS][NUM_DIRS][MAXFRAMES];
 };
