@@ -196,6 +196,11 @@ public:
   sf::Time m_deltaTime;
 
   /**
+   * Vector of the objective (given by the mouse in this moment)
+   */
+  Vector2 m_objective;
+
+  /**
    * Static states for the FSM
    */
 

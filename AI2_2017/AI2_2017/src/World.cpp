@@ -72,6 +72,21 @@ World::getUnitType(int id) {
   return &m_unitTypes[id];
 }
 
+void
+World::clearActiveUnits() {
+  m_activeUnits.clear();
+}
+
+void
+World::insertActiveUnits(Frame collider) {
+  for (int i = 0; i < m_unitsInGame.size(); ++i) {
+    Frame t = { m_unitsInGame[i]->m_actualFrame.size,m_unitsInGame[i]->getPosition(),false };
+    if (isColliding(collider, t)) { 
+      m_activeUnits.push_back(m_unitsInGame[i]); 
+    }
+  }
+}
+
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 /**
  * World.cpp Lua registration

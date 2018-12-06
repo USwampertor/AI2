@@ -440,7 +440,7 @@ public:
    *
    */
   void
-  normalize() const;
+  normalize();
 
   /**
    * @brief Checks if the vector is empty (0s)

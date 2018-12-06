@@ -9,6 +9,7 @@
 /*||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||°°°||*/
 
 #pragma once
+#include "Utilities.h"
 #include "Vector2.h"
 
 struct Frames
@@ -41,3 +42,10 @@ struct Frame
    */
   bool m_flipped = true;
 };
+
+static bool
+isColliding(const Frame& a, const Frame& b) {
+
+  return (std::abs(a.position.x - b.position.x) * 2 < (a.size.x + b.size.x)) &&
+    (std::abs(a.position.y - b.position.y) * 2 < (a.size.y + b.size.y));
+}

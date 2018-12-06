@@ -34,12 +34,45 @@ public:
   void
   initialization();
   
+  /**
+   * @brief creates a unit in the world with given coordinates
+   * @param id of the unittype and position of the object
+   * @return 
+   *
+   */
   void
   createUnit(int id, Vector2 position);
 
+  /**
+   * @brief creates a new Unit Type
+   * @param id of the unit Type
+   * @return 
+   *
+   */
   void
   createUnitType(int id);
 
+  /**
+   * @brief clears the active units from the vector
+   * @param 
+   * @return 
+   *
+   */
+  void
+  clearActiveUnits();
+
+  /**
+   * @brief selects all units inside the box generated
+   * @param 
+   * @return 
+   *
+   */
+  void
+  insertActiveUnits(Frame collider);
+  
+  /**
+   * Gets the unit type corresponding to the ID
+   */
   UnitType* 
   getUnitType(int id);
 
@@ -50,6 +83,10 @@ public:
    */
   std::vector<Unit*> m_unitsInGame;
   
+  /**
+   * list of selected objects
+   */
+  std::vector<Unit*> m_activeUnits;
   /**
    * List of all unitTypes from data base
    */

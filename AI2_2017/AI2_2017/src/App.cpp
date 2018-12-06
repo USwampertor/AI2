@@ -14,56 +14,6 @@ using std::static_pointer_cast;
 
 bool
 App::onEntry() {
-  
-  //OLD FONT MAP
-  //sf::Font font;
-  //if (!font.loadFromFile("resources/fonts/arial.ttf")) {
-  //  std::cout << "Failed to create default font from file...\n";
-  //  return false;
-  //}
-  //m_fontMap.insert(std::make_pair("default", font));
-  //
-  //if (!font.loadFromFile("resources/fonts/Aurebesh.otf")) {
-  //  std::cout << "Failed to create default font from file...\n";
-  //  return false;
-  //}
-  //m_fontMap.insert(std::make_pair("aurebesh", font));
-  //
-  //if (!font.loadFromFile("resources/fonts/PGB.ttf")) {
-  //  std::cout << "Failed to create default font from file...\n";
-  //  return false;
-  //}
-  //m_fontMap.insert(std::make_pair("pokemon", font));
-  //
-  //if (!font.loadFromFile("resources/fonts/HaraldRunic.ttf")) {
-  //  std::cout << "Failed to create default font from file...\n";
-  //  return false;
-  //}
-  //m_fontMap.insert(std::make_pair("runic", font));
-  //
-  //if (!font.loadFromFile("resources/fonts/BCastle.ttf")) {
-  //  std::cout << "Failed to create default font from file...\n";
-  //  return false;
-  //}
-  //m_fontMap.insert(std::make_pair("old", font));
-  //END OF OLD FONT MAP
-
-  //NEW FONT REGISTRATION IN RESOURCE MANAGER
-
-  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/Aurebesh.otf")) {
-  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/Aurebesh.otf");
-  //}
-  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/PGB.ttf")) {
-  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/PGB.ttf");
-  //}
-  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/HaraldRunic.ttf")) {
-  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/HaraldRunic.ttf");
-  //}
-  //if (m_resourceManager.canDecode(RESOURCETYPE::FONT, "resources/fonts/BCastle.ttf")) {
-  //  m_resourceManager.loadFromFile(RESOURCETYPE::FONT, "resources/fonts/BCastle.ttf");
-  //}
-  //END OF NEW FONT REGISTRATION IN RESOURCE MANAGER
-
 
   m_logoS = new Logo_State();
   m_playS = new Play_State();

@@ -45,6 +45,15 @@ class GameObject
   getID();
 
   /**
+   * @brief returns the position of the gameObject
+   * @param 
+   * @return vector2
+   *
+   */
+  const Vector2&
+  getPosition();
+
+  /**
    * @brief sets the unique ID of the Object
    * @param the ID to set to the game Object
    * @return 

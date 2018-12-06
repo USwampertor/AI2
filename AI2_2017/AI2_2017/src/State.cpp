@@ -316,8 +316,9 @@ Play_State::handleInput(sf::Event event) {
       m_fsm->setState(m_fsm->m_helpS);
     }
 
-    if (event.key.code == sf::Keyboard::D) {
-      m_world.createUnit(1,Vector2(0,0));
+    if (event.key.code == sf::Keyboard::U) {
+      m_world.createUnit(2, Vector2(std::rand() % 50, std::rand() % 50));
+      
     }
 
   }
@@ -361,7 +362,7 @@ Play_State::handleInput(sf::Event event) {
 
       sf::Mouse::setPosition(sf::Vector2i(m_mousePosition.x,
                                           m_fsm->m_screen.m_mainWindow.getSize().y - 20),
-                             m_fsm->m_screen.m_mainWindow);
+                                          m_fsm->m_screen.m_mainWindow);
 
       m_mainCamera.move(0.0f, 10.0f);
     }
@@ -381,16 +382,46 @@ Play_State::handleInput(sf::Event event) {
     }
   }
 
-
+  else if (event.type == sf::Event::MouseButtonPressed) {
+    if (event.mouseButton.button == sf::Mouse::Left) {
+      //m_anchor = m_mousePosition;
+      
+      m_anchor = m_worldPosition;
+      m_mouseRect.setPosition(sf::Vector2f(m_anchor.x, m_anchor.y));
+      m_pressed = true;
+      std::cout << "HOLDING MOUSE \n";
+    }
+    else if (event.mouseButton.button == sf::Mouse::Right) {
+      for (int i = 0; i < m_world.m_activeUnits.size(); ++i) {
+        m_world.m_activeUnits[i]->m_objective = Vector2(m_worldPosition.x, m_worldPosition.y);
+        m_world.m_activeUnits[i]->setState(m_world.m_activeUnits[i]->m_runS);
+      }
+    }
+  }
+  else if (event.type == sf::Event::MouseButtonReleased) {
+    if (event.mouseButton.button == sf::Mouse::Left) {
+      if (m_pressed) {
+        m_world.clearActiveUnits();
+        m_pressed = false;
+        Frame t = {Vector2(m_mouseRect.getSize().x,m_mouseRect.getSize().y), 
+                   Vector2(m_anchor.x,m_anchor.y),
+                   false };
+        m_world.insertActiveUnits(t);
+      }
+      std::cout << "RELEASING MOUSE \n";
+    }
+  }
   return true;
 }
 
 bool 
 Play_State::onInputUpdate(sf::Event event) {
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
-  if (event.type == sf::Event::KeyPressed || 
-      event.type == sf::Event::MouseMoved ||
-      event.type == sf::Event::MouseWheelMoved) {
+  if (event.type == sf::Event::KeyPressed         || 
+      event.type == sf::Event::MouseMoved         ||
+      event.type == sf::Event::MouseWheelMoved    ||
+      event.type == sf::Event::MouseButtonPressed ||
+      event.type == sf::Event::MouseButtonReleased ) {
     return handleInput(event);
 
   }
@@ -401,7 +432,8 @@ void
 Play_State::onEntry() {
   std::cout << "Playing..." << std::endl;
   m_ID = 5;
-
+  m_pressed = false;
+ 
   m_world.initialization();
   m_world.m_resourceManager = &m_fsm->m_resourceManager;
   //Only for testing
@@ -430,7 +462,9 @@ Play_State::onEntry() {
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
   m_fsm->m_screen.m_mainWindow.setView(m_fsm->m_screen.m_mainWindow.getDefaultView());
   
-
+  m_mouseRect.setOutlineThickness(2);
+  m_mouseRect.setOutlineColor(sf::Color::Blue);
+  m_mouseRect.setFillColor(sf::Color::Transparent);
 }
 
 void 
@@ -441,8 +475,10 @@ Play_State::onExit() {
 void
 Play_State::onRender(sf::RenderWindow* window) {
   
-  //window->draw(m_testMap);
-
+  m_worldPosition = sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow);
+  m_worldPosition = sf::Vector2i(window->mapPixelToCoords(m_worldPosition, m_mainCamera).x,
+                                 window->mapPixelToCoords(m_worldPosition, m_mainCamera).y);
+  window->draw(m_testMap);
 
   for (auto unit : m_world.m_unitsInGame) {
     sf::Sprite t;
@@ -451,20 +487,29 @@ Play_State::onRender(sf::RenderWindow* window) {
                                  (int)unit->m_actualFrame.position.y,
                                  (int)unit->m_actualFrame.size.x,
                                  (int)unit->m_actualFrame.size.y));
-    
+    t.setPosition(unit->getPosition().x, unit->getPosition().y);
     if (unit->m_actualFrame.m_flipped) { t.scale(-1,1); }
     window->draw(t);
   }
+
+  if (m_pressed) { window->draw(m_mouseRect); }
+
   m_fsm->m_screen.m_mainWindow.setView(m_miniMapCamera);
   window->draw(m_testMap);
+
   m_fsm->m_screen.m_mainWindow.setView(m_mainCamera);
 } 
 
 void
 Play_State::onUpdate() {
+  float deltaTime = m_time.restart().asSeconds();
   m_mousePosition = sf::Mouse::getPosition(m_fsm->m_screen.m_mainWindow);
+  //m_mousePosition = sf::Mouse::getPosition();
+  
+  if (m_pressed) { m_mouseRect.setSize(sf::Vector2f(m_worldPosition - m_anchor)); }
+  
   for (unsigned int i = 0; i < m_world.m_unitsInGame.size(); ++i) {
-    m_world.m_unitsInGame[i]->update(m_time.restart().asSeconds());
+    m_world.m_unitsInGame[i]->update(deltaTime);
   }
 }
 

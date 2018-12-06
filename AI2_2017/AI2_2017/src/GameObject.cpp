@@ -19,7 +19,6 @@ GameObject::setID(int id) {
   m_ID = id;
 }
 
-
 void
 GameObject::setPosition(float x, float y) {
   m_position.x = x;
@@ -36,4 +35,9 @@ void
 GameObject::setPosition(Vector2 position) {
   m_position.x = position.x;
   m_position.y = position.y;
+}
+
+const Vector2&
+GameObject::getPosition() {
+  return m_position;
 }

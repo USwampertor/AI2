@@ -183,7 +183,7 @@ Vector2::distance(const Vector2& a, const Vector2& b) {
 
 Vector2
 Vector2::rotate(float angle) {
-  float rad = angle * 180.0f / 3.14159f;
+  float rad = angle * 3.14159f / 180.0f;
   Vector2 temp = *this;
   temp.x = x * std::cos(rad) - y * std::sin(rad);
   temp.y = x * std::sin(rad) + y * std::cos(rad);
@@ -263,8 +263,14 @@ Vector2::normalized() {
 }
 
 void
-Vector2::normalize() const {
+Vector2::normalize() {
+  float sqr = std::pow(x, 2.0f) + std::pow(y, 2.0f);
+  //ASSERT(sqr != 0.0f && "The square of the elements is 0!!!");
+  //NAU_DEBUG_ONLY(sqrMagnitude());
 
+  float unit = 1.0f / std::sqrt(sqr);
+  this->x *= unit;
+  this->y *= unit;
 }
 
 bool

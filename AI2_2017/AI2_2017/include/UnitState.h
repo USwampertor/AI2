@@ -14,6 +14,8 @@
 #include "Utilities.h"
 #include "Vector2.h"
 
+#define MAGNITUDE 0.05f
+
 //Forward declaration
 class Unit;
 
@@ -71,7 +73,7 @@ public:
    *
    */
   virtual void
-  update() = 0;
+  update(float deltaTime) = 0;
 
   /**
    * Handles the input given
@@ -118,14 +120,16 @@ class Idle_State : public UnitState
   bool
   onUpdate(sf::Event event);
 
- void
-  update();
+  void
+  update(float deltaTime);
 
   bool
   handleInput(sf::Event event);
 
   ANIM
   getANIM();
+
+
 };
 
 class Attack_State : public UnitState
@@ -142,7 +146,7 @@ public:
   onUpdate(sf::Event event);
 
   void
-  update();
+  update(float deltaTime);
 
   bool
   handleInput(sf::Event event);
@@ -165,13 +169,16 @@ public:
   onUpdate(sf::Event event);
 
   void
-  update();
+  update(float deltaTime);
 
   bool
   handleInput(sf::Event event);
 
   ANIM
   getANIM();
+
+  Vector2 
+  seek(Vector2 objective);
 };
 
 class Dead_State : public UnitState
@@ -188,7 +195,7 @@ public:
   onUpdate(sf::Event event);
 
   void
-  update();
+  update(float deltaTime);
 
   bool
   handleInput(sf::Event event);

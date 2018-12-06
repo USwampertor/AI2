@@ -16,6 +16,7 @@ Unit::initialize() {
   m_runS    = new Run_State();
   m_deadS   = new Dead_State();
   m_orientation = { 1 , 0 };
+  m_orientation = m_orientation.rotate(std::rand() % 360);
   m_currentState = nullptr;
   setState(m_idleS);
   
@@ -24,50 +25,67 @@ Unit::initialize() {
 
 DIR
 Unit::orientation() {
-  float angle = (float)std::atan(m_orientation.y / m_orientation.x) * 3.14159 / 180;
-  //Looking Right
+  float angle = (float)std::atan(m_orientation.y / m_orientation.x) * 180.0f / 3.14159f;
 
-  if (angle < 67.5f && angle > 22.5f) {
+  //Second Quadrant
+  if      (m_orientation.x < 0 && m_orientation.y > 0) { 
+    angle += 90;  
     m_actualFrame.m_flipped = false;
+  }
+  //ThirdQuadrant
+  else if (m_orientation.x < 0 && m_orientation.y < 0) { 
+    angle += 180; 
+    m_actualFrame.m_flipped = false;
+  }
+  //Fourth Quadrant
+  if      (m_orientation.x > 0 && m_orientation.y < 0) { 
+    angle += 270; 
+    m_actualFrame.m_flipped = true;
+  }
+
+  //Looking Right
+  if (angle < 67.5f && angle > 22.5f) {
+    
     return DIR::NEAST;
   }
 
   if (angle < 112.5f  && angle > 67.5f) {
-    m_actualFrame.m_flipped = false;
+    
     return DIR::NORTH;
   }
 
   if (angle < 157.5f && angle > 112.5f) {
-    m_actualFrame.m_flipped = false;
+    
     return DIR::NWEST;
   }
 
   if (angle < 202.5f && angle > 157.5f) {
-    m_actualFrame.m_flipped = false;
+    
     return DIR::WEST;
   }
 
   if (angle < 247.5f && angle > 202.5f) {
-    m_actualFrame.m_flipped = false;
     return DIR::SWEST;
   }
 
   if (angle < 292.5f && angle > 247.5f) {
-    m_actualFrame.m_flipped = true;
     return DIR::SOUTH;
   }
 
   if (angle < 337.5F && angle > 292.5f) {
-    m_actualFrame.m_flipped = true;
     return DIR::SEAST;
   }
-
   m_actualFrame.m_flipped = true;
   return DIR::EAST;
 }
 
 void
 Unit::update(float deltaTime) {
+
+
+  m_currentState->update(deltaTime);
+
+  //Updates the actual frame by angle of rotation and action
   m_timeInState += deltaTime;
 
   float AnimDuration = 0.75f;
@@ -115,7 +133,7 @@ Unit::setState(UnitState* state) {
 
 void
 Unit::finish() {
-
+  
 }
 
 void

@@ -454,11 +454,28 @@ class Play_State : public State
   sf::Vector2i m_mousePosition;
 
   /**
+   * mouse position in world space
+   */
+  sf::Vector2i m_worldPosition;
+  /**
    * World object with all the stuff from the game
    */
   World m_world;
 
- 
+  /**
+   * The rectangle to command units
+   */
+  sf::RectangleShape m_mouseRect;
+
+  /**
+   * Rectangle anchor position
+   */
+  sf::Vector2i m_anchor;
+
+  /**
+   * Just to see if the mouse is being held
+   */
+  bool m_pressed;
 };
 
 class Options_State : public State 
